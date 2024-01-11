@@ -12,7 +12,7 @@ export default function HomePage() {
       <PageContent>
         <div className="flex justify-center items-center h-full">
           <Space direction="vertical" align="center" size="large">
-            <img src={horse} width={256} height={256} draggable={false} />
+            <img src={horse} width={256} height={256} draggable={false} className="unselectable" />
             <Button icon={<CarOutlined />}>开始新的征途</Button>
           </Space>
         </div>
