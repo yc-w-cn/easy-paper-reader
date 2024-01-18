@@ -9,3 +9,70 @@ body {
   -o-user-select: none;
   user-select: none;
 }
+
+.ant-input-affix-wrapper-focused {
+  box-shadow: none!important;
+}
+
+.ant-input:focus {
+  box-shadow: none!important;
+}
+
+.ant-input:focus-within {
+  box-shadow: none!important;
+}
+
+.ant-btn {
+  box-shadow: none!important;
+}
+
+::-webkit-scrollbar {
+    height: 1rem;
+    width: .5rem
+}
+
+::-webkit-scrollbar:horizontal {
+    height: .5rem;
+    width: 1rem
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 9999px
+}
+
+::-webkit-scrollbar-thumb {
+    --tw-border-opacity: 1;
+    background-color: rgba(217,217,227,.8);
+    border-color: rgba(255,255,255,var(--tw-border-opacity));
+    border-radius: 9999px;
+    border-width: 1px
+}
+
+::-webkit-scrollbar-thumb:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgba(217,217,227,var(--tw-bg-opacity))
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background-color: hsla(0,0%,100%,.1)
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background-color: hsla(0,0%,100%,.3)
+}
+
+.ant-select-item-option-selected {
+  background-color: rgba(0,0,0, 0.05) !important;
+}
+
+.ant-select-focused {
+  box-shadow: none!important;
+}
+
+.ant-tree-treenode-selected {
+}
+
+.ant-tree-node-selected{
+  background: #f5f5f5!important;
+}

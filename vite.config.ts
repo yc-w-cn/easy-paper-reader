@@ -11,7 +11,7 @@ export default defineConfig({
       {
         find: "@",
         replacement: fileURLToPath(new URL("./src", import.meta.url)),
-      },
+      }
     ],
   },
 })
