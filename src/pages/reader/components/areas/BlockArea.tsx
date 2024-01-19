@@ -21,52 +21,36 @@ export function BlockArea({ blockKey, role }: Props) {
   const { state: blockState, entity: blockEntity } = useReaderSelector(
     (state) => selectBlock(state, blockKey),
   )
-  
+
   const { state: creatorState, type: creatorType } = useReaderSelector(
     (state) => state.creator,
   )
 
-  if (role === "creator" && creatorState === "default") {
-    return <DefaultDisplayer />
-  }
+  const currentState = role === "creator" ? creatorState : blockState
+  const currentType = role === "creator" ? creatorType : blockEntity?.type
 
-  if (role === "creator" && creatorState === "select") {
-    return <BlockSelector />
-  }
-
-  if (role === "block" && !blockEntity) {
-    return <></>
-  }
-
-  if (
-    (role === "creator" ? creatorState : blockState)  === "edit" &&
-    (role === "creator" ? creatorType : blockEntity?.type) === "header"
-  ) {
+  if (currentState === "edit" && currentType === "header") {
     return <HeaderEditor blockKey={blockKey} role={role} />
   }
 
-  if (
-    role === "block" &&
-    blockState === "display" &&
-    blockEntity.type === "header" &&
-    blockEntity.properties
-  ) {
+  if (blockState === "display" && currentType === "header") {
     return <HeaderDisplayer blockKey={blockKey} role={role} />
   }
 
-  if (
-    role === "block" &&
-    blockState === "display" &&
-    blockEntity.type === "paragraph"
-  ) {
+  if (blockState === "display" && currentType === "paragraph") {
     return <ParagraphDisplayer blockKey={blockKey} role={role} />
   }
 
-  if (
-    (role === "creator" ? creatorState : blockState) === "edit" &&
-    (role === "creator" ? creatorType : blockEntity?.type) === "paragraph"
-  ) {
+  if (currentState === "edit" && currentType === "paragraph") {
     return <ParagraphEditor blockKey={blockKey} role={role} />
+  }
+
+  if (currentState === "default") {
+    return <DefaultDisplayer />
+  }
+
+  if (currentState === "select") {
+    return <BlockSelector />
   }
 
   return <></>
