@@ -13,7 +13,7 @@ export function PageSidebar() {
 
   return (
     <div
-      className="h-full w-1/4 relative border-r border-gray-300"
+      className="flex-none h-full w-[300px] relative border-r border-gray-300"
     >
       <header className="px-4 py-3">
         <div className="font-bold text-lg">Easy Paper Reader</div>
