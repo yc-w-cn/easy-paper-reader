@@ -69,11 +69,12 @@ export function ParagraphEditor({ blockKey, role }: Props) {
   }
 
   return (
-    <Space direction="vertical" className="w-full">
+    <Space direction="vertical" className="w-full my-4">
       <Input.TextArea
         value={content}
         onChange={(e) => setContent(e.currentTarget.value)}
         placeholder="请输入..."
+        autoSize={{ minRows: 3 }}
         onKeyDown={(e) => {
           if (e.key === "Escape") {
             handleCancel()
