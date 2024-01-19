@@ -21,8 +21,8 @@ export const readerPaperSlice = createSlice({
   initialState: DEFAULT_PAPER_STATE,
   reducers: {
     /**
-     * initPaper: 
-     * - 用于初次设置 paper 
+     * initPaper:
+     * - 用于初次设置 paper
      * - 设置了变动监听，会自动更新 blocks 和 tableOfContent
      */
     initPaper: (state, action: PayloadAction<PaperType>) => {
@@ -34,10 +34,10 @@ export const readerPaperSlice = createSlice({
      * 更新 Paper 但不触发更新
      * - 全局更新比较费劲，不触发更新更加轻量
      */
-    updatePaperOnly(state, action: PayloadAction<Partial<PaperType>>){
+    updatePaperOnly(state, action: PayloadAction<Partial<PaperType>>) {
       state.value = {
         ...state.value,
-        ...action.payload
+        ...action.payload,
       } as PaperType
     },
     resetPaper: () => DEFAULT_PAPER_STATE,
@@ -89,7 +89,8 @@ export const fetchPaperById = createAsyncThunk<
   },
 )
 
-export const { resetPaper, initPaper, updatePaperOnly } = readerPaperSlice.actions
+export const { resetPaper, initPaper, updatePaperOnly } =
+  readerPaperSlice.actions
 
 export const selectPaper = (state: RootReaderState) => state.paper.value
 

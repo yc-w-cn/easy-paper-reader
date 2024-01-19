@@ -197,6 +197,7 @@ export const addBlock = createAsyncThunk<
        * operate: redux
        */
       dispatch(updatePaperOnly(paper))
+      dispatch(fetchBlocks(paper.blockKeys))
       return block
     } catch (e: any) {
       return rejectWithValue({
