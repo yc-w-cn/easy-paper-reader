@@ -21,12 +21,23 @@
  * // 返回: []
  * const result = ensureArray(null);
  */
-export const ensureArray = (target: any) => {
+export function ensureArray(target: any) {
   if (Array.isArray(target)) {
-    return target;
+    return target
   }
   if (target) {
-    return [target];
+    return [target]
   }
-  return [];
-};
+  return []
+}
+
+/**
+ * Move an array item to a different position. 
+ * @return Returns a new array with the item moved to the new position.
+ */
+export function arrayMove<T>(array: T[], from: number, to: number): T[] {
+  const newArray = [...array]
+  const [item] = newArray.splice(from, 1)
+  newArray.splice(to, 0, item)
+  return newArray
+}

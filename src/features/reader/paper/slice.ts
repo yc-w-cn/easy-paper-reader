@@ -3,6 +3,7 @@ import { PaperType, getPaperById } from "@/apis/local-data/paper"
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import { fetchBlocks } from "../blocks"
 import { RootReaderState } from "@/stores"
+import { arrayMove } from "@dnd-kit/sortable"
 
 export type PaperState = {
   value: PaperType | null
@@ -41,6 +42,25 @@ export const readerPaperSlice = createSlice({
       } as PaperType
     },
     resetPaper: () => DEFAULT_PAPER_STATE,
+    /**
+     * 交换 blockKeys
+     */
+    exchangeBlockKeys(
+      state,
+      action: PayloadAction<{
+        fromBlockKey: string
+        toBlockKey: string
+      }>,
+    ) {
+      if (!state.value) return
+      const blockKeys = state.value.blockKeys
+      const { fromBlockKey, toBlockKey } = action.payload
+      const oldIndex = blockKeys.indexOf(fromBlockKey)
+      const newIndex = blockKeys.indexOf(toBlockKey)
+      if (oldIndex !== -1 && newIndex !== -1) {
+        state.value.blockKeys = arrayMove(blockKeys, oldIndex, newIndex)
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPaperById.pending, (state) => {
@@ -89,7 +109,7 @@ export const fetchPaperById = createAsyncThunk<
   },
 )
 
-export const { resetPaper, initPaper, updatePaperOnly } =
+export const { resetPaper, initPaper, updatePaperOnly, exchangeBlockKeys } =
   readerPaperSlice.actions
 
 export const selectPaper = (state: RootReaderState) => state.paper.value

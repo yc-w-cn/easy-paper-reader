@@ -1,30 +1,42 @@
-import Icon from "@ant-design/icons"
-import { Button, Popover } from "antd"
-import dragSvg from "@/pages/reader/images/drag.svg?react"
+import { BlockRole } from "@/pages"
+
+import { useSortable } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
 
 type Props = {
+  id: string
+  role: BlockRole
   left?: React.ReactNode
   right?: React.ReactNode
 }
-export function TwoColumnsWrapper({ left, right }: Props) {
+export function TwoColumnsWrapper({
+  id,
+  left,
+  right,
+  role = "creator",
+}: Props) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  }
+
+  const content = (
+    <div className="grid grid-cols-2 gap-4 w-full ml-10">
+      <div className="">{left}</div>
+      <div className="">{right}</div>
+    </div>
+  )
+
+  if (role === "creator") {
+    return content
+  }
+
   return (
-    <Popover
-      trigger="hover"
-      content={
-        <Button type="text" icon={<Icon component={dragSvg} />}></Button>
-      }
-      overlayInnerStyle={{
-        backgroundColor: "transparent",
-        padding: 0,
-        boxShadow: "none",
-      }}
-      placement="leftTop"
-      arrow={false}
-    >
-      <div className="grid grid-cols-2 gap-4 w-full ml-10">
-        <div className="">{left}</div>
-        <div className="">{right}</div>
-      </div>
-    </Popover>
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      {content}
+    </div>
   )
 }
