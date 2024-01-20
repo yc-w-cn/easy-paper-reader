@@ -2,13 +2,16 @@ import { Button, Popover, Space } from "antd"
 import { useNavigate } from "react-router-dom"
 import Icon, { EditOutlined, MenuOutlined } from "@ant-design/icons"
 import zenImage from "@/pages/reader/images/zen.svg?react"
+import oneColumnImage from "@/pages/reader/images/column-width.svg?react"
+import doubleColumnImage from "@/pages/reader/images/columns.svg?react"
 import { TableOfContent } from "@/pages/reader/components/areas"
 import { useReaderDispatch, useReaderSelector } from "@/stores"
 import { selectPaper } from "@/features/reader/paper"
-import { changeMode } from "@/features/reader/layout"
+import { changeColumnMode, changeMode } from "@/features/reader/layout"
 
 export function NormalPaperHeader() {
   const paper = useReaderSelector(selectPaper)
+  const columnMode = useReaderSelector((state) => state.layout.columnMode)
   const dispatch = useReaderDispatch()
   const navigate = useNavigate()
 
@@ -40,6 +43,27 @@ export function NormalPaperHeader() {
           icon={<EditOutlined />}
           onClick={() => navigate(`/paper/edit/${paper.id}`)}
         />
+        {columnMode === "one" ? (
+          <Button
+            size="small"
+            icon={
+              <Icon
+                component={doubleColumnImage}
+                onClick={() => dispatch(changeColumnMode("two"))}
+              />
+            }
+          />
+        ) : (
+          <Button
+            size="small"
+            icon={
+              <Icon
+                component={oneColumnImage}
+                onClick={() => dispatch(changeColumnMode("one"))}
+              />
+            }
+          />
+        )}
         <Button
           size="small"
           icon={
