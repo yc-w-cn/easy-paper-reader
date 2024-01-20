@@ -7,11 +7,13 @@ import { DataNode } from "antd/es/tree"
 export type ReaderTableOfContentState = {
   value: DataNode[]
   isLoaded: boolean
+  hideUnknownNodes: boolean
 }
 
 export const DEFAULT_TABLE_OF_CONTENT_STATE: ReaderTableOfContentState = {
   value: [],
   isLoaded: false,
+  hideUnknownNodes: true,
 }
 
 export const readerTableOfContentSlice = createSlice({
@@ -20,7 +22,7 @@ export const readerTableOfContentSlice = createSlice({
   reducers: {
     resetTableOfContent: () => DEFAULT_TABLE_OF_CONTENT_STATE,
     loadTableOfContent: (state, action: PayloadAction<BlockType[]>) => {
-      const nodes = getTableOfContentNodes(action.payload)
+      const nodes = getTableOfContentNodes(action.payload, state.hideUnknownNodes)
       state.isLoaded = true
       state.value = nodes
     },
@@ -30,6 +32,7 @@ export const readerTableOfContentSlice = createSlice({
 export const { resetTableOfContent, loadTableOfContent } =
   readerTableOfContentSlice.actions
 
-export const selectTableOfContent= (state: RootReaderState) => state.tableOfContent.value
+export const selectTableOfContent = (state: RootReaderState) =>
+  state.tableOfContent.value
 
 export const readerTableOfContentReducer = readerTableOfContentSlice.reducer

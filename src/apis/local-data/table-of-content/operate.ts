@@ -9,6 +9,7 @@ export function operateNodes(
   block: BlockType,
   nodes: DataNode[],
   stack: BlockNode[],
+  hideUnknownNodes: boolean = true,
 ) {
   const logger = getLogger(operateNodes, false)
   const currentLevel = block.properties.level
@@ -103,10 +104,15 @@ export function operateNodes(
     logger.debug("Jump Level", { currentLevel, lastLevel })
     // 当前目录应当是下级目录
     const unknownLevels = createUnknownLevels(lastLevel + 1, currentLevel - 1)
-    // 补足目录差距
-    for (const unknownLevel of unknownLevels) {
-      const unknownBlock = createUnknownBlock(unknownLevel)
-      operateNodes(unknownBlock, nodes, stack)
+    if (!hideUnknownNodes) {
+      // 补足目录差距
+      for (const unknownLevel of unknownLevels) {
+        const unknownBlock = createUnknownBlock(unknownLevel)
+        operateNodes(unknownBlock, nodes, stack)
+      }
+    } else {
+      appendNewNode()
+      return
     }
     // 加入到堆栈
     operateNodes(block, nodes, stack)
