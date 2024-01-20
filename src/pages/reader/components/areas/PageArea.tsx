@@ -4,7 +4,7 @@ import { useReaderDispatch, useReaderSelector } from "@/stores"
 
 import {
   DndContext,
-  closestCenter,
+  pointerWithin,
   KeyboardSensor,
   PointerSensor,
   useSensor,
@@ -46,7 +46,7 @@ export function PageArea() {
     <>
       <DndContext
         sensors={sensors}
-        collisionDetection={closestCenter}
+        collisionDetection={pointerWithin}
         onDragEnd={handleDragEnd}
       >
         <SortableContext
