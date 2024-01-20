@@ -32,10 +32,6 @@ export function PageArea() {
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event
-    console.log("handleDragEnd", {
-      active,
-      over,
-    })
     if (over && active.id !== over.id) {
       dispatch(
         exchangeBlockKeys({
