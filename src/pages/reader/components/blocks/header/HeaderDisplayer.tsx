@@ -6,7 +6,7 @@ import { cn } from "@/utils/tailwind"
 import { Typography } from "antd"
 
 type Props = {
-  role: BlockRole
+  role?: BlockRole
   blockKey?: string
 }
 

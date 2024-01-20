@@ -5,7 +5,7 @@ import { useReaderDispatch, useReaderSelector } from "@/stores"
 import { Typography } from "antd"
 
 type Props = {
-  role: BlockRole
+  role?: BlockRole
   blockKey?: string
 }
 
