@@ -69,7 +69,7 @@ export function ParagraphEditor({ blockKey, role }: Props) {
   }
 
   return (
-    <Space direction="vertical" className="w-full my-4">
+    <Space direction="vertical" className="w-full mb-4">
       <Input.TextArea
         value={content}
         onChange={(e) => setContent(e.currentTarget.value)}
