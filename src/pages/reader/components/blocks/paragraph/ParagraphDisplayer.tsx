@@ -19,7 +19,7 @@ export function ParagraphDisplayer({ blockKey }: Props) {
 
   return (
     <Typography.Paragraph
-      onClick={() => {
+      onDoubleClick={() => {
         dispatch(
           updateBlockState({
             blockKey,

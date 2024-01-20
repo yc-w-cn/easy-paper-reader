@@ -31,7 +31,7 @@ export function HeaderDisplayer({ blockKey }: Props) {
     <Typography.Title
       level={entity.properties.level}
       className={cn("", styles[properties.level || 0])}
-      onClick={() => {
+      onDoubleClick={() => {
         dispatch(
           updateBlockState({
             blockKey,
