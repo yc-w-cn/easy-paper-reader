@@ -2,6 +2,7 @@ import { BlockRole } from "@/pages"
 
 import { useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
+import { PopoverDragger } from "./PopoverDragger"
 
 type Props = {
   id: string
@@ -15,8 +16,14 @@ export function TwoColumnsWrapper({
   right,
   role = "creator",
 }: Props) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id })
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    setActivatorNodeRef,
+  } = useSortable({ id })
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -35,8 +42,13 @@ export function TwoColumnsWrapper({
   }
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      {content}
+    <div ref={setNodeRef} style={style} {...attributes}>
+      <PopoverDragger
+        setActivatorNodeRef={setActivatorNodeRef}
+        listeners={listeners}
+      >
+        {content}
+      </PopoverDragger>
     </div>
   )
 }
