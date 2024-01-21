@@ -6,18 +6,23 @@ import { DefaultPanel } from "../panels"
 type Props = {
   blockKey: string
   readonly?: boolean
+  hideRight?: boolean
 }
 
-export function BlockWrapper({ blockKey, readonly }: Props) {
+export function BlockWrapper({ blockKey, readonly, hideRight = false }: Props) {
   if (!blockKey) return <></>
 
   return (
     <BlockProvider blockKey={blockKey}>
       {readonly ? (
-        <AutoColumnContent content={[<BlockArea />, <DefaultPanel />]} />
+        <AutoColumnContent
+          content={[<BlockArea />, hideRight ? "" : <DefaultPanel />]}
+        />
       ) : (
         <DraggableWrapper>
-          <AutoColumnContent content={[<BlockArea />, <DefaultPanel />]} />
+          <AutoColumnContent
+            content={[<BlockArea />, hideRight ? "" : <DefaultPanel />]}
+          />
         </DraggableWrapper>
       )}
     </BlockProvider>
