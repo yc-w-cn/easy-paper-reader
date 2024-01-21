@@ -19,11 +19,14 @@ export function BlockWrapper({ blockKey, readonly, hideRight = false }: Props) {
           content={[<BlockArea />, hideRight ? "" : <DefaultPanel />]}
         />
       ) : (
-        <DraggableWrapper>
-          <AutoColumnContent
-            content={[<BlockArea />, hideRight ? "" : <DefaultPanel />]}
-          />
-        </DraggableWrapper>
+        <AutoColumnContent
+          content={[
+            <DraggableWrapper>
+              <BlockArea />
+            </DraggableWrapper>,
+            hideRight ? "" : <DefaultPanel />,
+          ]}
+        />
       )}
     </BlockProvider>
   )

@@ -47,7 +47,6 @@ export function PopoverDragger({
         backgroundColor: "transparent",
         padding: 0,
         boxShadow: "none",
-        marginRight: columnMode === "two" ? -150 : -200,
       }}
       placement="leftTop"
       arrow={false}

@@ -20,6 +20,8 @@ import {
 import { useState } from "react"
 import { BlockWrapper } from "../wrappers/BlockWrapper"
 import { CreatorWrapper } from "../wrappers/CreatorWrapper"
+import { BlockArea } from "."
+import { BlockProvider } from "../providers"
 
 export function PageArea() {
   const paper = useReaderSelector(selectPaper)
@@ -69,7 +71,11 @@ export function PageArea() {
           ))}
         </SortableContext>
         <DragOverlay adjustScale={false}>
-          {!!activeId && <BlockWrapper blockKey={activeId} hideRight={true} />}
+          {!!activeId && (
+            <BlockProvider blockKey={activeId}>
+              <BlockArea />
+            </BlockProvider>
+          )}
         </DragOverlay>
       </DndContext>
       <CreatorWrapper />

@@ -29,7 +29,7 @@ export function HeaderEditorBase({
   }, [initialValues?.content])
 
   return (
-    <Space direction="vertical" className="w-full my-4">
+    <Space direction="vertical" className="w-full">
       <Space>
         <Radio.Group
           value={level}
