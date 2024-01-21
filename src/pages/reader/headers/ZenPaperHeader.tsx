@@ -11,7 +11,7 @@ export function ZenPaperHeader() {
   if (!paper) return <></>
 
   return (
-    <header className="px-20 pt-4 relative flex gap-4 justify-between items-center">
+    <header className="px-14 pt-4 relative flex gap-4 justify-between items-center">
       <div className="flex-1">
         <h1 className="text-lg leading-4 font-normal">{paper.title}</h1>
         <h2 className="text-sm text-gray-500 leading-4 font-normal">
