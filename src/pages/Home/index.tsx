@@ -8,7 +8,7 @@ export function HomePage() {
   const navigate = useNavigate()
 
   return (
-    <BasicLayout>
+    <BasicLayout mode="center">
       <Space direction="vertical" align="center" size="large">
         <img
           src={horse}

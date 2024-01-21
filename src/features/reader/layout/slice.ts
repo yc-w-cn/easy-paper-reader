@@ -1,3 +1,4 @@
+import { RootReaderState } from "@/stores"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export type LayoutMode = "zen" | "basic"
@@ -23,6 +24,14 @@ export const readerLayoutSlice = createSlice({
     },
   },
 })
+
+export const selectLayoutMode = (state: RootReaderState) => {
+  return state.layout.mode
+}
+
+export const selectLayoutColumnMode = (state: RootReaderState) => {
+  return state.layout.columnMode
+}
 
 export const { changeMode, changeColumnMode } = readerLayoutSlice.actions
 

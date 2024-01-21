@@ -1,4 +1,4 @@
-export * from "./use-current-block.hook";
+export * from "./use-block.hook";
 export * from "./use-current-blocks.hook";
 export * from "./use-current-paper.hook";
 export * from "./use-current-table-of-content.hook";

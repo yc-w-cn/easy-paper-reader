@@ -12,7 +12,7 @@ export function MenuBar() {
   const navigate = useNavigate()
 
   return (
-    <Flex className="absolute top-0 left-0 py-2 px-4 w-full border-b justify-between">
+    <Flex className="flex-none py-2 px-4 w-full border-b justify-between">
       <Space size="small">
         <Button
           type="text"

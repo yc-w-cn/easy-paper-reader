@@ -1,6 +1,8 @@
+import { Flex } from "antd"
+
 type Props = {
-  children?: React.ReactNode;
-};
+  children?: React.ReactNode
+}
 export function PageContent({ children }: Props) {
-  return <div className="flex-grow relative">{children}</div>;
+  return <Flex vertical className="w-full">{children}</Flex>
 }

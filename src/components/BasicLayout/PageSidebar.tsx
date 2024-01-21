@@ -12,15 +12,13 @@ export function PageSidebar() {
   const navigate = useNavigate()
 
   return (
-    <div
-      className="flex-none h-full w-[300px] relative border-r border-gray-300"
-    >
+    <div className="flex flex-col flex-none h-full w-[300px] relative border-r border-gray-300">
       <header className="px-4 py-3">
         <div className="font-bold text-lg">Easy Paper Reader</div>
         <div className="text-sm">基于人工智能的论文阅读辅助工具</div>
       </header>
       <div className="border-gray-300 border-t w-full"></div>
-      <div className="py-8 px-6 flex flex-col gap-3">
+      <div className="py-8 px-6 flex flex-col flex-shrink gap-3 overflow-auto">
         <Button
           icon={<HomeOutlined />}
           type="text"
@@ -47,7 +45,7 @@ export function PageSidebar() {
           时光荏苒
         </Button>
       </div>
-      <footer className="absolute bottom-1 left-0 w-full flex justify-between text-xs px-5 pt-1 border-gray-500 border-t opacity-30">
+      <footer className="absolute bottom-1 left-0 w-full flex justify-between text-xs px-5 pt-1 bg-white border-gray-300 text-gray-400 border-t">
         <span>&copy; 2024</span>
         <span>Yuchen Wang</span>
         <span>MIT LICENSED</span>
@@ -55,4 +53,3 @@ export function PageSidebar() {
     </div>
   )
 }
-

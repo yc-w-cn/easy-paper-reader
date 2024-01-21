@@ -1,6 +1,7 @@
 import { ReaderStartListening } from "@/stores"
 import { Unsubscribe } from "@reduxjs/toolkit"
-import { fetchBlocks, updateBlockEntity } from "./slice"
+import { updateBlockEntity } from "./slice"
+import { fetchBlocks } from "./thunks"
 
 /**
  * Subscribes counter listeners and returns a `teardown` function.

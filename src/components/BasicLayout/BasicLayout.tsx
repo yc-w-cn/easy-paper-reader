@@ -13,7 +13,7 @@ export function BasicLayout({ children, mode = "center" }: Props) {
       <PageContent>
         <MenuBar />
         {mode === "center" ? (
-          <div className="flex flex-grow justify-center items-center">
+          <div className="flex flex-1 justify-center items-center">
             {children}
           </div>
         ) : (

@@ -37,7 +37,10 @@ export async function saveBlockProperties(
     }
     return saveBlock({
       ...previousValue,
-      properties,
+      properties: {
+        ...previousValue.properties,
+        ...properties
+      },
       key: blockKey,
       mtime: new Date().getTime(),
     })

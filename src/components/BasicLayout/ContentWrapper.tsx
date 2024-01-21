@@ -7,5 +7,5 @@ type Props = {
 };
 
 export function ContentWrapper({ children, className }: Props) {
-  return <div className={cn("w-full h-full pt-10 flex flex-col", className)}>{children}</div>;
+  return <div className={cn("w-full flex-grow-1 flex-shrink flex flex-col overflow-auto", className)}>{children}</div>;
 }

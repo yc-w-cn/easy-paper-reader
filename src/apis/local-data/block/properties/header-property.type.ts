@@ -1,4 +1,4 @@
 export type HeaderPropertiesType = {
-  level: 5 | 1 | 2 | 3 | 4 | undefined
+  level: number
   content: string
 }
