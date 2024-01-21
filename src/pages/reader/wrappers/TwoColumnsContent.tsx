@@ -5,7 +5,7 @@ type Props = {
 
 export function TwoColumnsContent({ left, right }: Props) {
   return (
-    <div className="grid grid-cols-2 gap-4 w-full pl-10">
+    <div className="grid grid-cols-2 gap-4 w-full px-10">
       <div className="">{left}</div>
       <div className="">{right}</div>
     </div>
