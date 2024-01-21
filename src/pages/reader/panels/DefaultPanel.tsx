@@ -10,7 +10,7 @@ export function DefaultPanel() {
   }
 
   return (
-    <Flex vertical gap={5}>
+    <Flex vertical gap={5} className="mb-5">
       <Radio.Group
         options={["属性", "批注"]}
         onChange={onChange}
