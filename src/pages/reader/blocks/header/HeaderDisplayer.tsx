@@ -12,6 +12,7 @@ const styles: Record<number, string> = {
   2: "text-lg",
   3: "text-base",
   4: "text-sm",
+  5: "text-xs",
 }
 
 export function HeaderDisplayer() {
