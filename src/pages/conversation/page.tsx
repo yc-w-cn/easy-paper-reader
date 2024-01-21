@@ -70,7 +70,7 @@ export function ConversationPage() {
   }
 
   return (
-    <BasicLayout>
+    <BasicLayout mode="custom">
       <ContentWrapper className="flex flex-col">
         <Flex vertical gap={20} className="flex-1 overflow-y-auto px-20 py-10">
           {messages.length === 0 && <div></div>}
