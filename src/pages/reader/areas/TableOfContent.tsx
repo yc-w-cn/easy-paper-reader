@@ -11,8 +11,6 @@ export function TableOfContent({ className }: Props) {
     (state) => state.tableOfContent,
   )
 
-  // TODO: Save TreeView States into Redux
-
   return (
     <div className={className}>
       {isLoaded && tableOfContent.length === 0 && (

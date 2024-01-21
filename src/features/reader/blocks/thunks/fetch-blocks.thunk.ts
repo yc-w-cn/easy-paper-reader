@@ -1,13 +1,18 @@
 import { BlockType, getBlocks } from "@/apis/local-data/block"
 import { DEFAULT_ERROR_MESSAGE, KnownError } from "@/apis/local-data/error"
-import { ActionReducerMapBuilder, createAsyncThunk } from "@reduxjs/toolkit"
+import {
+  ActionReducerMapBuilder,
+  createAsyncThunk,
+} from "@reduxjs/toolkit"
 import { ReaderBlocksState } from "@/features/reader/blocks"
-import { loadTableOfContent } from "@/features/reader/table-of-content"
+import { fetchTableOfContent } from "@/features/reader/table-of-content"
+import { RootReaderState } from "@/stores"
 
 export const fetchBlocks = createAsyncThunk<
   BlockType[],
   string[],
   {
+    state: RootReaderState
     rejectValue: KnownError
   }
 >(
@@ -15,7 +20,7 @@ export const fetchBlocks = createAsyncThunk<
   async (blockKeys, { dispatch, rejectWithValue }) => {
     try {
       const blocks = await getBlocks(blockKeys)
-      dispatch(loadTableOfContent(blocks))
+      dispatch(fetchTableOfContent())
       return blocks
     } catch (e: any) {
       return rejectWithValue({
