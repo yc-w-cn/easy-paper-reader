@@ -1,6 +1,6 @@
 export * from "./ChatGptAccount";
 export * from "./GeminiModelTable";
-export * from "./SettingPage";
+export * from "./page";
 export * from "./TabChatGpt";
 export * from "./TabCommon";
 export * from "./TabDictionary";

@@ -1,3 +1,3 @@
 export * from "./ChatGptUserAvatar";
-export * from "./ConversationPage";
+export * from "./page";
 export * from "./ProviderAvatar";
