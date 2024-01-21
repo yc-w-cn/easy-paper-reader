@@ -4,8 +4,6 @@ import { BlockContext } from "./BlockContext"
 export const useBlockKey = () => {
   const context = useContext(BlockContext)
 
-  console.log('context', context)
-  
   if (!context) {
     throw new Error("useBlockKey must be used within a BlockProvider")
   }
