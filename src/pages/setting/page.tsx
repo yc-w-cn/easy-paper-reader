@@ -4,7 +4,7 @@ import { TabCommon, TabFanyi, TabDictionary, TabStorage } from "@/pages/setting"
 
 export function SettingPage() {
   return (
-    <BasicLayout>
+    <BasicLayout mode='custom'>
       <ContentWrapper className="mr-5">
         <Tabs
           className="h-full"
