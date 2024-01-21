@@ -37,7 +37,9 @@ export function ReaderPage() {
               <PageArea />
             </>
           ) : (
-            <Skeleton />
+            <div className="p-20">
+              <Skeleton />
+            </div>
           )}
         </AutoLayout>
       </Spin>
