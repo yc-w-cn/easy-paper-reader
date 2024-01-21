@@ -69,7 +69,7 @@ export function PageArea() {
           ))}
         </SortableContext>
         <DragOverlay adjustScale={false}>
-          {!!activeId && <BlockWrapper blockKey={activeId} />}
+          {!!activeId && <BlockWrapper blockKey={activeId} hideRight={true} />}
         </DragOverlay>
       </DndContext>
       <CreatorWrapper />
