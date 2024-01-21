@@ -10,7 +10,7 @@ export function PapersMinePage() {
   const { tagOptions } = useTagNames()
 
   return (
-    <BasicLayout>
+    <BasicLayout mode="custom">
       <ContentWrapper className="px-5 mt-10">
         <ProTable<PaperType>
           actionRef={actionRef}
