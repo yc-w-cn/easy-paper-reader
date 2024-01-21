@@ -9,21 +9,15 @@ type Props = {
 }
 
 export function BlockWrapper({ blockKey, readonly }: Props) {
-  console.log("blockKey", blockKey)
-
   if (!blockKey) return <></>
 
   return (
     <BlockProvider blockKey={blockKey}>
       {readonly ? (
-        <AutoColumnContent
-          content={[<BlockArea role="block" />, <DefaultPanel />]}
-        />
+        <AutoColumnContent content={[<BlockArea />, <DefaultPanel />]} />
       ) : (
         <DraggableWrapper>
-          <AutoColumnContent
-            content={[<BlockArea role="block" />, <DefaultPanel />]}
-          />
+          <AutoColumnContent content={[<BlockArea />, <DefaultPanel />]} />
         </DraggableWrapper>
       )}
     </BlockProvider>

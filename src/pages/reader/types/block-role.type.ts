@@ -1,1 +1,0 @@
-export type BlockRole = "block" | "creator"
