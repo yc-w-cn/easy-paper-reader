@@ -8,7 +8,8 @@ import {
   PaperCreatePage,
   PaperEditPage,
   ReaderPage,
-  TagsPage
+  TagsPage,
+  CommentsPage,
 } from "@/pages"
 import { createBrowserRouter } from "react-router-dom"
 
@@ -52,5 +53,9 @@ export const router = createBrowserRouter([
   {
     path: "/tags",
     element: <TagsPage />,
+  },
+  {
+    path: "/comments",
+    element: <CommentsPage />,
   },
 ])
