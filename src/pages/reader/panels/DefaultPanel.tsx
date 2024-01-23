@@ -1,4 +1,4 @@
-import { Flex, Radio, RadioChangeEvent } from "antd"
+import { Flex, Popover, Radio, RadioChangeEvent } from "antd"
 import { useState } from "react"
 import { CommentPanel, PropertyPanel, ReferencePanel, WordPanel } from "."
 
@@ -10,18 +10,30 @@ export function DefaultPanel() {
   }
 
   return (
-    <Flex vertical gap={5} className="mb-5">
-      <Radio.Group
-        options={["属性", "术语", "文献", "笔记"]}
-        onChange={onChange}
-        value={value}
-        size="small"
-        optionType="button"
-      />
-      {value === "属性" && <PropertyPanel />}
-      {value === "笔记" && <CommentPanel />}
-      {value === "术语" && <WordPanel />}
-      {value === "文献" && <ReferencePanel readonly />}
-    </Flex>
+    <Popover
+      arrow={false}
+      placement="topLeft"
+      content={
+        <Radio.Group
+          options={["属性", "术语", "文献", "笔记"]}
+          onChange={onChange}
+          value={value}
+          size="small"
+          optionType="button"
+        />
+      }
+      overlayInnerStyle={{
+        backgroundColor: "transparent",
+        padding: 0,
+        boxShadow: "none",
+      }}
+    >
+      <Flex vertical gap={5} className="mb-5 h-full">
+        {value === "属性" && <PropertyPanel />}
+        {value === "笔记" && <CommentPanel />}
+        {value === "术语" && <WordPanel />}
+        {value === "文献" && <ReferencePanel readonly />}
+      </Flex>
+    </Popover>
   )
 }
