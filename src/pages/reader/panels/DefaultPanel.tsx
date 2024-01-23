@@ -12,7 +12,7 @@ export function DefaultPanel() {
   return (
     <Flex vertical gap={5} className="mb-5">
       <Radio.Group
-        options={["属性", "批注","术语", "参考文献"]}
+        options={["属性", "注解","术语", "参考文献"]}
         onChange={onChange}
         value={value}
         size="small"
@@ -21,7 +21,7 @@ export function DefaultPanel() {
       { value ==='属性' && (
         <PropertyPanel />
       )}
-      { value ==='批注' && (
+      { value ==='注解' && (
         <CommentPanel />
       )}
       { value ==='术语' && (
