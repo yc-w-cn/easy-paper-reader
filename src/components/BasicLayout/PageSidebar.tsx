@@ -43,11 +43,20 @@ export function PageSidebar() {
         >
           全部标签
         </Button>
-        <Button icon={<BookOutlined />} type="text" className="text-left"
-          onClick={() => navigate("/comments")}>
+        <Button
+          icon={<BookOutlined />}
+          type="text"
+          className="text-left"
+          onClick={() => navigate("/comments")}
+        >
           我的笔记
         </Button>
-        <Button icon={<FieldTimeOutlined />} type="text" className="text-left">
+        <Button
+          icon={<FieldTimeOutlined />}
+          type="text"
+          className="text-left"
+          onClick={() => navigate("/timeline")}
+        >
           时光荏苒
         </Button>
       </div>

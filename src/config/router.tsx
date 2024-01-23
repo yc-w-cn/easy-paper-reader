@@ -11,6 +11,7 @@ import {
   TagsPage,
   CommentsPage,
 } from "@/pages"
+import { TimelinePage } from "@/pages/timeline"
 import { createBrowserRouter } from "react-router-dom"
 
 export const router = createBrowserRouter([
@@ -57,5 +58,9 @@ export const router = createBrowserRouter([
   {
     path: "/comments",
     element: <CommentsPage />,
+  },
+  {
+    path: "/timeline",
+    element: <TimelinePage />,
   },
 ])
