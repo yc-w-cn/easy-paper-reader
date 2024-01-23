@@ -15,6 +15,7 @@ export function WordPanel() {
     <Space direction="horizontal" wrap size={0}>
       {words.map((item, index) => (
         <Popover
+        key={`popover-${index}`}
           content={item.translatedWord}
           trigger={"hover"}
           placement="top"
