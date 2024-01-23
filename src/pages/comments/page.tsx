@@ -5,7 +5,7 @@ import {
 import { BasicLayout, ContentWrapper } from "@/components"
 import { ReloadOutlined } from "@ant-design/icons"
 import { useQuery } from "@tanstack/react-query"
-import { App, Button, Card, Flex, Space, Tag } from "antd"
+import { App, Button, Card, Space } from "antd"
 
 export function CommentsPage() {
   const { message } = App.useApp()
