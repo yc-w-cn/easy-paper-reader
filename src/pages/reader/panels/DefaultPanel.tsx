@@ -21,7 +21,7 @@ export function DefaultPanel() {
       {value === "属性" && <PropertyPanel />}
       {value === "笔记" && <CommentPanel />}
       {value === "术语" && <WordPanel />}
-      {value === "文献" && <ReferencePanel />}
+      {value === "文献" && <ReferencePanel readonly />}
     </Flex>
   )
 }

@@ -1,6 +1,9 @@
-import { replace, clone } from "lodash"
+import { replace, clone, compact } from "lodash"
 
-export const confusingList = [["e.g.", "e#g#"], ["vs.","vs#"]]
+export const confusingList = [
+  ["e.g.", "e#g#"],
+  ["vs.", "vs#"],
+]
 
 export function replaceConfusingWords(text: string) {
   let result = clone(text)
@@ -20,14 +23,47 @@ export function recoveryConfusingWords(text: string) {
 
 export function toSentences(text: string) {
   const convertedText = replaceConfusingWords(text)
+  const sentences = convertedText.split("\n\n")
+  const result: string[] = []
+  for (const sentence of sentences) {
+    const shouldAddTailDot = sentence.endsWith(".")
+    const splitSentences = compact(sentence.split("."))
+    splitSentences.forEach((item, index) => {
+      if (item && index !== splitSentences.length - 1) {
+        result.push(recoveryConfusingWords(item.trim()) + ".")
+      } else if (
+        item &&
+        index === splitSentences.length - 1 &&
+        shouldAddTailDot
+      ) {
+        result.push(recoveryConfusingWords(item.trim()) + ".")
+      } else if (
+        item &&
+        index === splitSentences.length - 1 &&
+        !shouldAddTailDot
+      ) {
+        result.push(recoveryConfusingWords(item.trim()))
+      }
+    })
+  }
 
-  const sentences = convertedText.split(".")
+  return result
+}
 
-  sentences.forEach((item, index) => {
-    if (item) {
-      sentences[index] = recoveryConfusingWords(item.trim()) + "."
-    }
-  })
+export function findWordOccurrences(
+  sentence: string,
+  word: string,
+): { start: number; end: number }[] {
+  const result: { start: number; end: number }[] = []
+  const regex = new RegExp(`\\b${word}\\b`, "gi")
 
-  return sentences.filter((item) => !!item)
+  let match
+  while ((match = regex.exec(sentence)) !== null) {
+    result.push({
+      start: match.index,
+      end: match.index + match[0].length - 1,
+    })
+  }
+
+  return result
 }

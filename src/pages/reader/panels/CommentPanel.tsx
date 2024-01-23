@@ -16,6 +16,10 @@ export function CommentPanel() {
   return (
     <Input.TextArea
       value={blockEntity?.properties.comment}
+      autoSize={{
+        minRows: 5
+      }}
+      placeholder="请输入笔记"
       onChange={(e) => {
         if (blockEntity) {
           dispatch(

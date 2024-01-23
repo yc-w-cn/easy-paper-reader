@@ -10,7 +10,11 @@ import { useState } from "react"
 import { filter, some } from "lodash"
 import { DeleteOutlined } from "@ant-design/icons"
 
-export function ReferencePanel() {
+type Props = {
+  readonly?: boolean
+}
+
+export function ReferencePanel({ readonly = false }: Props) {
   const dispatch = useReaderDispatch()
   const { blockKey } = useBlockKey()
   const blockEntity = useReaderSelector((state) =>
@@ -97,35 +101,37 @@ export function ReferencePanel() {
           {reference.title}
         </p>
       ))}
-      <ConfigProvider autoInsertSpaceInButton={false}>
-        <Space direction="vertical" size="small">
-          <Input
-            value={word}
-            onChange={(e) => setWord(e.currentTarget.value)}
-            size="small"
-            className="w-[400px]"
-            placeholder="文献缩写"
-          />
-          <Input.TextArea
-            value={title}
-            onChange={(e) => setTitle(e.currentTarget.value)}
-            size="small"
-            autoSize={{
-              minRows: 4,
-            }}
-            className="w-[400px]"
-            placeholder="文章名称"
-          />
-          <Space>
-            <Button size="small" type="primary" onClick={handleSave}>
-              保存
-            </Button>
-            <Button size="small" type="default" onClick={resetCreator}>
-              重置
-            </Button>
+      {!readonly && (
+        <ConfigProvider autoInsertSpaceInButton={false}>
+          <Space direction="vertical" size="small">
+            <Input
+              value={word}
+              onChange={(e) => setWord(e.currentTarget.value)}
+              size="small"
+              className="w-[400px]"
+              placeholder="文献缩写"
+            />
+            <Input.TextArea
+              value={title}
+              onChange={(e) => setTitle(e.currentTarget.value)}
+              size="small"
+              autoSize={{
+                minRows: 4,
+              }}
+              className="w-[400px]"
+              placeholder="文章名称"
+            />
+            <Space>
+              <Button size="small" type="primary" onClick={handleSave}>
+                保存
+              </Button>
+              <Button size="small" type="default" onClick={resetCreator}>
+                重置
+              </Button>
+            </Space>
           </Space>
-        </Space>
-      </ConfigProvider>
+        </ConfigProvider>
+      )}
     </Space>
   )
 }
