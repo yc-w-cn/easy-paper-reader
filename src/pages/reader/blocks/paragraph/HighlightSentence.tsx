@@ -148,7 +148,7 @@ export function HighlightSentence({ id, sentence }: Props) {
         style={{}}
         text={sentence}
       />
-      <Space wrap>
+      <Space wrap className="bg-gray-100 rounded-xl py-2 my-2 ml-5">
         {words.map((word, index) => {
           if (sentence.includes(word.word)) {
             return (
@@ -179,7 +179,7 @@ export function HighlightSentence({ id, sentence }: Props) {
                   onChange={(e) =>
                     handleTranslatedWordChange(word.word, e.currentTarget.value)
                   }
-                  placeholder="输入词语解释"
+                  placeholder={word.word}
                 />
               </Space>
             )

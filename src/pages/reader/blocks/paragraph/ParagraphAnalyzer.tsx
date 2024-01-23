@@ -112,7 +112,7 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
         ></Input.TextArea>
       )}
       {panel === "词解" && (
-        <div className="flex-grow flex-shrink overflow-auto">
+        <div className="flex-grow flex-shrink overflow-auto pr-2">
           <Space direction="vertical">
             {sentencesText.split("\n").map((sentence, index) => (
               <HighlightSentence
