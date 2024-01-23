@@ -12,7 +12,7 @@ export function WordPanel() {
   const words = (blockEntity?.properties?.words as WordType[]) || []
 
   return (
-    <Space direction="horizontal" wrap size={0}>
+    <Space direction="horizontal" wrap size={[0, 5]}>
       {words.map((item, index) => (
         <Popover
         key={`popover-${index}`}
