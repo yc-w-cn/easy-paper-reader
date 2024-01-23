@@ -1,7 +1,7 @@
 import { selectBlockEntity } from "@/features/reader/blocks"
 import { useReaderSelector } from "@/stores"
 import { useBlockKey } from "../providers"
-import { Space, Tag } from "antd"
+import { Popover, Space, Tag } from "antd"
 import { WordType } from "@/apis/local-data/block"
 
 export function WordPanel() {
@@ -12,9 +12,15 @@ export function WordPanel() {
   const words = (blockEntity?.properties?.words as WordType[]) || []
 
   return (
-    <Space direction="horizontal" wrap>
+    <Space direction="horizontal" wrap size={0}>
       {words.map((item, index) => (
-        <Tag key={`word-${index}`}>{item.word}</Tag>
+        <Popover
+          content={item.translatedWord}
+          trigger={"hover"}
+          placement="top"
+        >
+          <Tag key={`word-${index}`}>{item.word}</Tag>
+        </Popover>
       ))}
     </Space>
   )
