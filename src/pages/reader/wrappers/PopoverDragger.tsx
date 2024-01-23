@@ -9,7 +9,6 @@ import {
   updateBlockShowDragger,
 } from "@/features/reader/blocks"
 import { useBlockKey } from "../providers"
-import { selectLayoutColumnMode } from "@/features/reader/layout"
 
 type Props = {
   listeners?: SyntheticListenerMap
@@ -26,8 +25,6 @@ export function PopoverDragger({
   const showDragger = useReaderSelector((state) =>
     selectBlockShowDragger(state, blockKey),
   )
-  const columnMode = useReaderSelector(selectLayoutColumnMode)
-
   return (
     <Popover
       open={showDragger || false}
