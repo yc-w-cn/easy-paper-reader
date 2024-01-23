@@ -35,7 +35,12 @@ export function PageSidebar() {
         >
           我的论文
         </Button>
-        <Button icon={<TagOutlined />} type="text" className="text-left">
+        <Button
+          icon={<TagOutlined />}
+          type="text"
+          className="text-left"
+          onClick={() => navigate("/tags")}
+        >
           全部标签
         </Button>
         <Button icon={<BookOutlined />} type="text" className="text-left">
