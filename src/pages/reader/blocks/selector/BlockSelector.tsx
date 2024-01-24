@@ -1,7 +1,7 @@
 import headerSvg from "@/pages/reader/images/header.svg?react"
 import paragraphSvg from "@/pages/reader/images/paragraph.svg?react"
 import { Button, Flex, Tooltip } from "antd"
-import Icon, { LogoutOutlined } from "@ant-design/icons"
+import Icon, { LogoutOutlined, PictureOutlined } from "@ant-design/icons"
 import { useReaderDispatch } from "@/stores"
 import {
   setCreatorState,
@@ -44,6 +44,20 @@ export function BlockSelector() {
               )
             }}
             icon={<Icon component={paragraphSvg} />}
+          ></Button>
+        </Tooltip>
+        <Tooltip placement="top" title="图片">
+          <Button
+            onClick={(e) => {
+              e.stopPropagation()
+              dispatch(
+                setCreator({
+                  type: "image",
+                  state: "edit",
+                }),
+              )
+            }}
+            icon={<PictureOutlined />}
           ></Button>
         </Tooltip>
         <Tooltip placement="top" title="退出">

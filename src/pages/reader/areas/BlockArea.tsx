@@ -5,7 +5,8 @@ import {
 } from "@/pages/reader/blocks/paragraph"
 import { useReaderSelector } from "@/stores"
 import { selectBlock } from "@/features/reader/blocks"
-import { useBlockKey } from "../providers"
+import { useBlockKey } from "@/pages/reader/providers"
+import { ImageEditor, ImageDisplayer } from "@/pages/reader/blocks/image"
 
 export function BlockArea() {
   const { blockKey } = useBlockKey()
@@ -30,6 +31,14 @@ export function BlockArea() {
 
   if (blockState === "edit" && blockEntity.type === "paragraph") {
     return <ParagraphEditor />
+  }
+
+  if (blockState === "display" && blockEntity.type === "image") {
+    return <ImageDisplayer />
+  }
+
+  if (blockState === "edit" && blockEntity.type === "image") {
+    return <ImageEditor />
   }
 
   return <></>

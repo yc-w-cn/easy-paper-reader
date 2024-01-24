@@ -1,4 +1,5 @@
+export * from "./default";
 export * from "./header";
 export * from "./paragraph";
-export * from "./default";
+export * from "./image";
 export * from "./selector";
