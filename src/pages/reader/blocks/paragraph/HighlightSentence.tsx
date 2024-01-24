@@ -43,7 +43,7 @@ export function HighlightSentence({ id, sentence }: Props) {
     return result
   }, [words, sentence])
 
-  const removeWord = (word: string) => { 
+  const removeWord = (word: string) => {
     dispatch(
       saveBlockProperties({
         blockKey,
@@ -78,22 +78,24 @@ export function HighlightSentence({ id, sentence }: Props) {
   }
 
   const handleCreateWord = (word: string) => {
-    const newWords = [
-      ...words,
-      {
-        word,
-        translatedWord: "",
-      },
-    ]
-
-    dispatch(
-      saveBlockProperties({
-        blockKey,
-        properties: {
-          words: newWords,
+    if (!words.some((item) => item.word === word)) {
+      const newWords = [
+        ...words,
+        {
+          word,
+          translatedWord: "",
         },
-      }),
-    )
+      ]
+
+      dispatch(
+        saveBlockProperties({
+          blockKey,
+          properties: {
+            words: newWords,
+          },
+        }),
+      )
+    }
   }
 
   return (
