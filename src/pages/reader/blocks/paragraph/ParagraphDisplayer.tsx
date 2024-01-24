@@ -6,6 +6,7 @@ import { useBlockKey } from "@/pages/reader/providers"
 import { EyeOutlined } from "@ant-design/icons"
 import { useState } from "react"
 import { ParagraphAnalyzer } from "./ParagraphAnalyzer"
+import { HighlightSentence } from "./HighlightSentence"
 
 export function ParagraphDisplayer() {
   const dispatch = useReaderDispatch()
@@ -48,7 +49,7 @@ export function ParagraphDisplayer() {
             )
           }}
         >
-          {properties.content}
+          <HighlightSentence id={blockKey} sentence={properties.content} readonly={true} />
         </Typography.Paragraph>
       </Popover>
       <ParagraphAnalyzer open={openViewer} onOpenChange={setOpenViewer} />
