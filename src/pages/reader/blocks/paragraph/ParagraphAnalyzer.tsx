@@ -113,7 +113,7 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
       )}
       {panel === "词解" && (
         <div className="flex-grow flex-shrink overflow-auto pr-2">
-          <Space direction="vertical">
+          <Flex vertical gap={10}>
             {sentencesText.split("\n").map((sentence, index) => (
               <HighlightSentence
                 id={`sentence-${index}`}
@@ -121,7 +121,7 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
                 sentence={sentence}
               />
             ))}
-          </Space>
+          </Flex>
         </div>
       )}
       {panel === "文献" && <ReferencePanel />}

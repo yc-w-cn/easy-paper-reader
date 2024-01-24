@@ -1,8 +1,8 @@
-import { Button, Input, Popover, Space, Tooltip } from "antd"
+import { Button, Flex, Input, Popover, Space, Tooltip } from "antd"
 import Highlightable, { Range } from "highlightable"
 import { useState } from "react"
 import { cloneDeep, filter, map, slice, uniq, update } from "lodash"
-import { DeleteOutlined } from "@ant-design/icons"
+import { DeleteOutlined, TranslationOutlined } from "@ant-design/icons"
 import { useReaderDispatch, useReaderSelector } from "@/stores"
 import { useBlockKey } from "@/pages/reader/providers"
 import { saveBlockProperties, selectBlock } from "@/features/reader/blocks"
@@ -24,7 +24,26 @@ export function HighlightSentence({ id, sentence }: Props) {
   const dispatch = useReaderDispatch()
   const { blockKey } = useBlockKey()
   const { entity } = useReaderSelector((state) => selectBlock(state, blockKey))
-  const words = (entity?.properties?.words as WordType[]) || []
+
+  const allWords: WordType[] = useDeepCompareMemo(
+    () => entity?.properties?.words || [],
+    [entity?.properties?.words],
+  )
+
+  const words = useDeepCompareMemo(() => {
+    const result: WordType[] = []
+    if (!allWords) return result
+    for (const word of allWords) {
+      if (sentence.includes(word.word)) {
+        result.push(word)
+      }
+    }
+    result.sort(
+      (item1, item2) =>
+        sentence.indexOf(item1.word) - sentence.indexOf(item2.word),
+    )
+    return result
+  }, [allWords, sentence])
 
   const ranges = useDeepCompareMemo(() => {
     const result: Range[] = []
@@ -48,7 +67,7 @@ export function HighlightSentence({ id, sentence }: Props) {
       saveBlockProperties({
         blockKey,
         properties: {
-          words: filter(words, (item) => item.word !== word),
+          words: filter(allWords, (item) => item.word !== word),
         },
       }),
     )
@@ -60,7 +79,7 @@ export function HighlightSentence({ id, sentence }: Props) {
   }
 
   const handleTranslatedWordChange = (word: string, translatedWord: string) => {
-    const newWords = map(cloneDeep(words), (obj) => {
+    const newWords = map(cloneDeep(allWords), (obj) => {
       if (obj.word === word) {
         return update(obj, "translatedWord", () => translatedWord)
       }
@@ -78,9 +97,9 @@ export function HighlightSentence({ id, sentence }: Props) {
   }
 
   const handleCreateWord = (word: string) => {
-    if (!words.some((item) => item.word === word)) {
+    if (!allWords.some((item) => item.word === word)) {
       const newWords = [
-        ...words,
+        ...allWords,
         {
           word,
           translatedWord: "",
@@ -150,16 +169,19 @@ export function HighlightSentence({ id, sentence }: Props) {
         style={{}}
         text={sentence}
       />
-      <Space wrap className="bg-gray-100 rounded-xl py-2 my-2 ml-5">
+      <Space
+        direction="vertical"
+        className="bg-gray-100 rounded-xl py-2 my-2 mx-5 w-auto"
+      >
         {words.map((word, index) => {
           if (sentence.includes(word.word)) {
             return (
-              <Space key={`word-${index}`}>
+              <Flex key={`word-${index}`}>
                 <Popover
-                  placement="left"
+                  placement="topLeft"
                   content={
                     <Button
-                      type="text"
+                      type="default"
                       icon={<DeleteOutlined />}
                       size="small"
                       onClick={() => removeWord(word.word)}
@@ -172,18 +194,41 @@ export function HighlightSentence({ id, sentence }: Props) {
                     boxShadow: "none",
                   }}
                 >
-                  <span className="ml-5 font-bold">{word.word}</span>
+                  <span className="flex-none ml-5 font-bold">{word.word}</span>
                 </Popover>
-                <Input
-                  size="small"
-                  bordered={false}
-                  value={word.translatedWord}
-                  onChange={(e) =>
-                    handleTranslatedWordChange(word.word, e.currentTarget.value)
+                <Popover
+                  placement="topLeft"
+                  content={
+                    <Button
+                      type="default"
+                      icon={<TranslationOutlined />}
+                      size="small"
+                      onClick={() => removeWord(word.word)}
+                    />
                   }
-                  placeholder={word.word}
-                />
-              </Space>
+                  arrow={false}
+                  overlayInnerStyle={{
+                    backgroundColor: "transparent",
+                    padding: 0,
+                    marginLeft: 5,
+                    boxShadow: "none",
+                  }}
+                >
+                  <Input
+                    size="small"
+                    bordered={false}
+                    className="flex-grow"
+                    value={word.translatedWord}
+                    onChange={(e) =>
+                      handleTranslatedWordChange(
+                        word.word,
+                        e.currentTarget.value,
+                      )
+                    }
+                    placeholder={word.word}
+                  />
+                </Popover>
+              </Flex>
             )
           }
           return <></>
