@@ -9,6 +9,7 @@ import { ReferenceType } from "@/apis/local-data/block"
 import { useState } from "react"
 import { filter, some } from "lodash"
 import { DeleteOutlined } from "@ant-design/icons"
+import { isURL } from "@/utils/url"
 
 type Props = {
   readonly?: boolean
@@ -98,7 +99,13 @@ export function ReferencePanel({ readonly = false }: Props) {
             <strong>{reference.word}</strong>
           </Popover>
           <br />
-          {reference.title}
+          {isURL(reference.title) ? (
+            <a href={reference.title} target="_blank">
+              {reference.title}
+            </a>
+          ) : (
+            reference.title
+          )}
         </p>
       ))}
       {!readonly && (
