@@ -11,3 +11,8 @@ export async function getModel(model: string = "gemini-pro") {
 export async function getGeminiProModel() {
   return getModel("gemini-pro")
 }
+
+export async function getGeminiProVisionModel() {
+  return getModel("gemini-pro-vision")
+}
+

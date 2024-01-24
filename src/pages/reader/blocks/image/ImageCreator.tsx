@@ -11,7 +11,7 @@ export function ImageCreator() {
     dispatch(resetCreator())
   }
 
-  const handleSubmit = ({ content }: ImagePropertiesType) => {
+  const handleSubmit = ({ type, content }: ImagePropertiesType) => {
     if (!content) {
       handleCancel()
       return
@@ -19,7 +19,7 @@ export function ImageCreator() {
     dispatch(
       addBlock({
         type: "image",
-        properties: { content },
+        properties: { type, content },
       }),
     )
     dispatch(resetCreator())

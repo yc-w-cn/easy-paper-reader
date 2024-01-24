@@ -1,6 +1,6 @@
 import { ReaderStartListening } from "@/stores"
 import { Unsubscribe } from "@reduxjs/toolkit"
-import { exchangeBlockKeys, initPaper } from "./slice"
+import { exchangeBlockKeys, initPaper, removeBlockKey } from "./slice"
 import { fetchBlocks } from "../blocks"
 import { updatePaper } from "@/apis/local-data/paper"
 
@@ -35,6 +35,17 @@ export function setupPaperListeners(
     }),
     startListening({
       actionCreator: exchangeBlockKeys,
+      effect: async (_, listenerApi) => {
+        const paper = listenerApi.getState().paper.value
+        if (paper) {
+          updatePaper(paper.key, {
+            blockKeys: paper.blockKeys,
+          })
+        }
+      },
+    }),
+    startListening({
+      actionCreator: removeBlockKey,
       effect: async (_, listenerApi) => {
         const paper = listenerApi.getState().paper.value
         if (paper) {

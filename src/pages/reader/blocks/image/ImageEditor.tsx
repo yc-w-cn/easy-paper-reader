@@ -18,7 +18,7 @@ export function ImageEditor() {
     dispatch(updateBlockState({ blockKey, blockState: "display" }))
   }
 
-  const handleSubmit = ({ content }: ImagePropertiesType) => {
+  const handleSubmit = ({ type, content }: ImagePropertiesType) => {
     if (!content) {
       handleCancel()
       return
@@ -28,6 +28,7 @@ export function ImageEditor() {
       saveBlockProperties({
         blockKey,
         properties: {
+          type,
           content,
         },
       }),

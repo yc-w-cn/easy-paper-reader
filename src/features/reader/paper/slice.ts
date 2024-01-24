@@ -1,9 +1,10 @@
 import { KnownError, DEFAULT_ERROR_MESSAGE } from "@/apis/local-data/error"
 import { PaperType, getPaperById } from "@/apis/local-data/paper"
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import { fetchBlocks } from "../blocks"
 import { RootReaderState } from "@/stores"
 import { arrayMove } from "@dnd-kit/sortable"
+import { filter } from "lodash"
+import { fetchBlocks } from "../blocks/thunks/fetch-blocks.thunk"
 
 export type PaperState = {
   value: PaperType | null
@@ -61,6 +62,12 @@ export const readerPaperSlice = createSlice({
         state.value.blockKeys = arrayMove(blockKeys, oldIndex, newIndex)
       }
     },
+    removeBlockKey(state, action: PayloadAction<string>) {
+      if (!state.value) return
+      const blockKeys = state.value.blockKeys
+      const blockKey = action.payload
+      state.value.blockKeys = filter(blockKeys, (item) => item !== blockKey)
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchPaperById.pending, (state) => {
@@ -87,6 +94,7 @@ export const fetchPaperById = createAsyncThunk<
   PaperType | null,
   string,
   {
+    state: RootReaderState
     rejectValue: KnownError
   }
 >(
@@ -109,8 +117,13 @@ export const fetchPaperById = createAsyncThunk<
   },
 )
 
-export const { resetPaper, initPaper, updatePaperOnly, exchangeBlockKeys } =
-  readerPaperSlice.actions
+export const {
+  resetPaper,
+  initPaper,
+  updatePaperOnly,
+  exchangeBlockKeys,
+  removeBlockKey,
+} = readerPaperSlice.actions
 
 export const selectPaper = (state: RootReaderState) => state.paper.value
 

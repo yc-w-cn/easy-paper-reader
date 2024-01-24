@@ -15,6 +15,7 @@ export function ImageEditorBase({
   initialValues,
 }: Props) {
   const [content, setContent] = useState("")
+  const [type, setType] = useState("")
 
   useEffect(() => {
     if (initialValues?.content) {
@@ -24,21 +25,6 @@ export function ImageEditorBase({
 
   return (
     <Space direction="vertical" className="w-full">
-      <Input.TextArea
-        value={content}
-        onChange={(e) => setContent(e.currentTarget.value)}
-        placeholder="请输入..."
-        onKeyDown={(e) => {
-          if (e.key === "Escape") {
-            handleCancel()
-          }
-          if (e.metaKey && e.key === "Enter") {
-            handleSubmit({
-              content,
-            })
-          }
-        }}
-      />
       <div
         onPaste={(event: any) => {
           const items = (
@@ -54,6 +40,7 @@ export function ImageEditorBase({
                 setContent(base64Data)
               }
               reader.readAsDataURL(blob);
+              setType(blob.type)
             }
           }
         }}
@@ -74,6 +61,7 @@ export function ImageEditorBase({
           size="small"
           onClick={() => {
             handleSubmit({
+              type,
               content,
             })
           }}
