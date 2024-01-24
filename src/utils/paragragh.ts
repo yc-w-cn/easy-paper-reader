@@ -55,7 +55,7 @@ export function findWordOccurrences(
   word: string,
 ): { start: number; end: number }[] {
   const result: { start: number; end: number }[] = []
-  const regex = new RegExp(`\\b${word}\\b`, "gi")
+  const regex = new RegExp(`${word}`, "gi")
 
   let match
   while ((match = regex.exec(sentence)) !== null) {
