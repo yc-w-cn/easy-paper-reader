@@ -9,6 +9,7 @@ import { saveBlockProperties, selectBlock } from "@/features/reader/blocks"
 import { findWordOccurrences } from "@/utils/paragragh"
 import { WordType } from "@/apis/local-data/block"
 import { useDeepCompareMemo } from "use-deep-compare"
+import { getGeminiReply } from "@/apis/gemini/generate"
 
 type Props = {
   id: string
@@ -160,8 +161,8 @@ export function HighlightSentence({ id, sentence }: Props) {
             </Tooltip>
           )
         }}
-        onMouseOverHighlightedWord={(range: Range) => {
-          console.log("range", range)
+        onMouseOverHighlightedWord={() => {
+          // do nothing
         }}
         highlightStyle={{
           backgroundColor: "#ffcc80",
@@ -203,7 +204,11 @@ export function HighlightSentence({ id, sentence }: Props) {
                       type="default"
                       icon={<TranslationOutlined />}
                       size="small"
-                      onClick={() => removeWord(word.word)}
+                      onClick={async () => {
+                        const prompt = `请翻译下述内容为简体中文，只需要返回结果。请翻译：「${word.word}」`
+                        const translatedWord = await getGeminiReply(prompt)
+                        handleTranslatedWordChange(word.word, translatedWord)
+                      }}
                     />
                   }
                   arrow={false}
