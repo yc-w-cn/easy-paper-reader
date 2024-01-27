@@ -4,15 +4,18 @@ import {
 } from "@/apis/local-data/history"
 import { BasicLayout, ContentWrapper } from "@/components"
 import { ReloadOutlined } from "@ant-design/icons"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { App, Button, Space, Timeline } from "antd"
 import { CreatePaperAction } from "./CreatePaperAction"
 
+const QUERY_KEY = "history-snapshot"
+
 export function TimelinePage() {
   const { message } = App.useApp()
+  const queryClient = useQueryClient()
 
   const response = useQuery({
-    queryKey: ["history-snapshot"],
+    queryKey: [QUERY_KEY],
     queryFn: () => getHistorySnapshot(),
   })
 
@@ -27,6 +30,9 @@ export function TimelinePage() {
           <Button
             onClick={() => {
               refreshHistorySnapshot()
+              queryClient.invalidateQueries({
+                queryKey: [QUERY_KEY],
+              })
               response.refetch()
               message.success("操作成功")
             }}
