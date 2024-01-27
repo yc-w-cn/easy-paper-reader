@@ -8,7 +8,7 @@ const QUERY_KEY = "tags-snapshot"
 
 export function TagsPage() {
   const { message } = App.useApp()
-  const queryClinet = useQueryClient()
+  const queryClient = useQueryClient()
 
   const response = useQuery({
     queryKey: [QUERY_KEY],
@@ -17,7 +17,7 @@ export function TagsPage() {
 
   const handleRefresh = () => {
     refreshTagsSnapshot()
-    queryClinet.invalidateQueries({ queryKey: [QUERY_KEY] })
+    queryClient.invalidateQueries({ queryKey: [QUERY_KEY] })
     response.refetch()
     message.success("操作成功")
   }
