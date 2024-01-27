@@ -3,7 +3,9 @@ import { getAllPapers } from "@/apis/local-data/paper"
 import { SyncOutlined } from "@ant-design/icons"
 import { useQuery } from "@tanstack/react-query"
 import { Button, Card, Space, Statistic } from "antd"
+import dayjs from "dayjs"
 import localforage from "localforage"
+import { ImportDataButton } from "./ImportDataButton"
 
 export function TabStorage() {
   const response = useQuery({
@@ -26,12 +28,13 @@ export function TabStorage() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
-    a.download = "exportedData.json"
+    a.download = `exported-data-${dayjs().format('YYYY-MM-DD')}.json`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
   }
+
 
   return (
     <div className="my-4 flex flex-col">
@@ -85,11 +88,12 @@ export function TabStorage() {
           />
         </Card>
       </Space>
-      <div className="my-5">
+      <Space className="my-5">
         <Button type="primary" onClick={handleExport}>
           备份数据
         </Button>
-      </div>
+        <ImportDataButton />
+      </Space>
     </div>
   )
 }
