@@ -13,11 +13,11 @@ export function ReadOnlyArea({ blockKey }: Props) {
   if (!entity) return <></>
 
   if (entity.type === "header") {
-    return <HeaderDisplayer blockKey={blockKey} />
+    return <HeaderDisplayer />
   }
 
   if (entity.type === "paragraph") {
-    return <ParagraphDisplayer blockKey={blockKey} />
+    return <ParagraphDisplayer />
   }
 
   return <></>

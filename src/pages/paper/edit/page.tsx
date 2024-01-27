@@ -1,6 +1,6 @@
 import { translate } from "@/apis/alapi-cn/fanyi"
 import { PaperType, getPaper, updatePaper } from "@/apis/local-data/paper"
-import { BasicLayout, ContentWrapper, PageContent } from "@/components"
+import { BasicLayout, ContentWrapper } from "@/components"
 import { c } from "@/utils/key-name"
 import Logger from "@/utils/logger"
 import { TranslationOutlined } from "@ant-design/icons"

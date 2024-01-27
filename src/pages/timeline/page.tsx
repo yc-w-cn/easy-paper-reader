@@ -3,11 +3,9 @@ import {
   refreshHistorySnapshot,
 } from "@/apis/local-data/history"
 import { BasicLayout, ContentWrapper } from "@/components"
-import { SHORT_DATE_STRING } from "@/utils/date"
 import { ReloadOutlined } from "@ant-design/icons"
 import { useQuery } from "@tanstack/react-query"
-import { App, Button, Space, Tag, Timeline } from "antd"
-import dayjs from "dayjs"
+import { App, Button, Space, Timeline } from "antd"
 import { CreatePaperAction } from "./CreatePaperAction"
 
 export function TimelinePage() {

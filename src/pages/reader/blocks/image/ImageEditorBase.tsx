@@ -1,4 +1,4 @@
-import { Button, Flex, Input, Space, Image } from "antd"
+import { Button, Flex, Space, Image } from "antd"
 import { useEffect, useState } from "react"
 import { ImagePropertiesType } from "@/apis/local-data/block"
 import { InboxOutlined } from "@ant-design/icons"
