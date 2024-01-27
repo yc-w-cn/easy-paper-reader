@@ -63,10 +63,10 @@ export function PageArea() {
         onDragEnd={handleDragEnd}
       >
         <SortableContext
-          items={paper.blockKeys}
+          items={paper.blockKeys || []}
           strategy={verticalListSortingStrategy}
         >
-          {paper.blockKeys.map((blockKey) => (
+          {paper.blockKeys?.map((blockKey) => (
             <BlockWrapper key={blockKey} blockKey={blockKey} />
           ))}
         </SortableContext>
