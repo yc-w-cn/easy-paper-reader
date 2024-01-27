@@ -17,10 +17,15 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
   const { blockKey } = useBlockKey()
   const { entity } = useReaderSelector((state) => selectBlock(state, blockKey))
   const [panel, setPanel] = useState("拆句")
+  const [isMix, setIsMix] = useState(false)
 
   const sentencesText = (entity?.properties?.sentences as string[])?.join?.(
     "\n\n",
   )
+
+  const toggleMixNote = () => {
+    setIsMix((previous) => !previous)
+  }
 
   const updateSentencesFromText = (text: string) => {
     dispatch(
@@ -99,6 +104,13 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
                 </Button>
               </>
             )}
+            {panel === "词解" && (
+              <>
+                <Button size="small" onClick={() => toggleMixNote()}>
+                  MIX {"<->"} NOTE
+                </Button>
+              </>
+            )}
             <Button size="small">AI</Button>
           </Space.Compact>
         </ConfigProvider>
@@ -119,6 +131,7 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
                 id={`sentence-${index}`}
                 key={`sentence-${index}`}
                 sentence={sentence}
+                isMix={isMix}
               />
             ))}
           </Flex>

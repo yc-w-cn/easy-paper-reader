@@ -15,6 +15,7 @@ type Props = {
   id: string
   sentence: string
   readonly?: boolean
+  isMix?: boolean
 }
 
 const rangeToWord = (range: Range) => {
@@ -22,7 +23,12 @@ const rangeToWord = (range: Range) => {
   return slice(text, start, end + 1).join("")
 }
 
-export function HighlightSentence({ id, sentence, readonly = false }: Props) {
+export function HighlightSentence({
+  id,
+  sentence,
+  readonly = false,
+  isMix = false,
+}: Props) {
   const dispatch = useReaderDispatch()
   const { blockKey } = useBlockKey()
   const { entity } = useReaderSelector((state) => selectBlock(state, blockKey))
@@ -154,6 +160,21 @@ export function HighlightSentence({ id, sentence, readonly = false }: Props) {
               </Tooltip>
             )
           }
+          if (isMix) {
+            const translatedWord = (range.data as any as WordType).translatedWord
+            if(translatedWord){
+              return (
+                <span key={`tooltip-${rangeIndex}`}>
+                  {lettersNode}（{translatedWord}）
+                </span>
+              )
+            }
+            return (
+              <span key={`tooltip-${rangeIndex}`}>
+                {lettersNode}
+              </span>
+            )
+          }
           return (
             <Tooltip
               key={`tooltip-${rangeIndex}`}
@@ -190,12 +211,12 @@ export function HighlightSentence({ id, sentence, readonly = false }: Props) {
         style={{}}
         text={sentence}
       />
-      {!readonly && (
+      {!readonly && !isMix && (
         <>
           {!!words.length && (
             <Space
               direction="vertical"
-              className="bg-gray-100 rounded-xl py-2 my-2 mx-5 w-auto"
+              className="bg-gray-100 rounded-xl py-2 mt-2 mx-5 w-auto"
             >
               {words.map((word, index) => {
                 if (sentence.includes(word.word)) {
