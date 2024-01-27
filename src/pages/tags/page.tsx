@@ -15,22 +15,24 @@ export function TagsPage() {
     queryFn: () => getTagsSnapshot(),
   })
 
+  const handleRefresh = () => {
+    refreshTagsSnapshot()
+    queryClinet.invalidateQueries({ queryKey: [QUERY_KEY] })
+    response.refetch()
+    message.success("操作成功")
+  }
+
   return (
     <BasicLayout mode="center">
       <Flex align="center" justify="center" gap={5}>
-        <Button
-          onClick={() => {
-            refreshTagsSnapshot()
-            queryClinet.invalidateQueries({ queryKey: [QUERY_KEY] })
-            response.refetch()
-            message.success("操作成功")
-          }}
-          type="text"
-          size="small"
-          icon={<ReloadOutlined />}
-        />
-        {!(response.data?.length || 0) ? (
+        {(response.data?.length || 0) ? (
           <>
+            <Button
+              onClick={handleRefresh}
+              type="text"
+              size="small"
+              icon={<ReloadOutlined />}
+            />
             <strong>全部标签：</strong>
             {response.data?.map((tag, index) => (
               <Tag key={`tag-${index}`}>{tag}</Tag>
