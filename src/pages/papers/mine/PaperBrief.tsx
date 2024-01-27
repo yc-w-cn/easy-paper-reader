@@ -12,7 +12,7 @@ export function PaperBrief({ paper }: Props) {
       {paper.translatedTitle && (
         <span className="text-xs text-gray-600">{paper.translatedTitle}</span>
       )}
-      {paper.tags.length > 0 && (
+      {paper.tags?.length > 0 && (
         <Space size={4}>
           {paper.tags.map((item, index) => (
             <Tag
