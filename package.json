@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.17.7",
+    "@tauri-apps/cli": "^1.5.9",
     "@testing-library/jest-dom": "^6.2.0",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.10.8",
