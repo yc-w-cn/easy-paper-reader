@@ -115,11 +115,11 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
           </Space.Compact>
         </ConfigProvider>
       </Flex>
-      {panel === "拆句" && (
+      {panel === "拆句" && sentencesText && (
         <Input.TextArea
           className="flex-grow flex-shrink resize-none"
           autoSize={false}
-          value={sentencesText}
+          defaultValue={sentencesText}
           onChange={(e) => updateSentencesFromText(e.currentTarget.value)}
         ></Input.TextArea>
       )}
