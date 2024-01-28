@@ -112,6 +112,7 @@ export function HighlightSentence({
   }
 
   const handleCreateWord = (word: string) => {
+    if (!word) return
     if (!allWords.some((item) => item.word === word)) {
       const newWords = [
         ...allWords,
