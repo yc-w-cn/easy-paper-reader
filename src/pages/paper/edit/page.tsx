@@ -18,6 +18,9 @@ import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { TagsEditor } from "@/pages/paper"
 import { refreshTagsSnapshot } from "@/apis/local-data/tag"
+import { ArxivEditor } from "./ArxivEditor"
+import { PaperWithCodeEditor } from "./PaperWithCodeEditor"
+import { GithubEditor } from "./GithubEditor"
 
 const { Search } = Input
 
@@ -42,7 +45,6 @@ export function PaperEditPage() {
     const paper = await getPaper(c("paper", paperId))
     logger.debug("paper", paper)
     if (paper) {
-      formRef.current?.setFieldsValue(paper)
       setPreviousPaper(paper)
     }
   }
@@ -70,8 +72,11 @@ export function PaperEditPage() {
             className="mt-10 max-w-[600px]"
             layout="horizontal"
             grid
+            request={async () => {
+              return previousPaper
+            }}
             labelCol={{
-              span: 4,
+              span: 6,
             }}
             colProps={{
               span: 24,
@@ -165,6 +170,19 @@ export function PaperEditPage() {
                 }}
               />
             )}
+            <ProFormItem name="arxiv" label="arXiv" className="w-full">
+              <ArxivEditor />
+            </ProFormItem>
+            <ProFormItem
+              name="paperWithCode"
+              label="PaperWithCode"
+              className="w-full"
+            >
+              <PaperWithCodeEditor />
+            </ProFormItem>
+            <ProFormItem name="github" label="Github" className="w-full">
+              <GithubEditor />
+            </ProFormItem>
             <ProFormItem label="标签" name="tags" className="w-full">
               <TagsEditor />
             </ProFormItem>
