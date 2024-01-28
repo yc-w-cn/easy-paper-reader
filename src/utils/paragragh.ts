@@ -54,6 +54,7 @@ export function findWordOccurrences(
   sentence: string,
   word: string,
 ): { start: number; end: number }[] {
+  if (!sentence || !word) return []
   const result: { start: number; end: number }[] = []
   const regex = new RegExp(`${word}`, "gi")
 
