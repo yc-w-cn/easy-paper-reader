@@ -10,6 +10,7 @@ import { ReferenceType, WordType } from "@/apis/local-data/block"
 import { useDeepCompareMemo } from "use-deep-compare"
 import { getGeminiReply } from "@/apis/gemini/generate"
 import { isURL } from "@/utils/url"
+import { translate } from "@/apis/gemini/prompts/translate"
 
 type Props = {
   id: string
@@ -161,19 +162,16 @@ export function HighlightSentence({
             )
           }
           if (isMix) {
-            const translatedWord = (range.data as any as WordType).translatedWord
-            if(translatedWord){
+            const translatedWord = (range.data as any as WordType)
+              .translatedWord
+            if (translatedWord) {
               return (
                 <span key={`tooltip-${rangeIndex}`}>
                   {lettersNode}（{translatedWord}）
                 </span>
               )
             }
-            return (
-              <span key={`tooltip-${rangeIndex}`}>
-                {lettersNode}
-              </span>
-            )
+            return <span key={`tooltip-${rangeIndex}`}>{lettersNode}</span>
           }
           return (
             <Tooltip
@@ -251,9 +249,7 @@ export function HighlightSentence({
                             icon={<TranslationOutlined />}
                             size="small"
                             onClick={async () => {
-                              const prompt = `请翻译下述内容为简体中文，只需要返回结果。请翻译：「${word.word}」`
-                              const translatedWord =
-                                await getGeminiReply(prompt)
+                              const translatedWord = await translate(word.word)
                               handleTranslatedWordChange(
                                 word.word,
                                 translatedWord,
