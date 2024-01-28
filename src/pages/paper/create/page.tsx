@@ -30,6 +30,24 @@ export function PaperCreatePage() {
   const navigate = useNavigate()
   const formRef = useRef<ProFormInstance>()
 
+  const handleTranslate = async () => {
+    if (!title) return
+    const keyName = c("fanyi", title)
+    const cachedResult = await localforage.getItem<string>(keyName)
+    if (cachedResult) {
+      logger.debug("cachedResult", cachedResult)
+      formRef.current?.setFieldValue("translatedTitle", cachedResult)
+      return
+    }
+    const result = await translate(title)
+    logger.debug("result", result)
+    if (result.code !== 200) {
+      message.error(result.msg)
+    }
+    formRef.current?.setFieldValue("translatedTitle", result.data.dst)
+    localforage.setItem(keyName, result.data.dst)
+  }
+
   return (
     <BasicLayout>
       <Card title="开始新的征途">
@@ -61,30 +79,7 @@ export function PaperCreatePage() {
                 <Button
                   type="text"
                   icon={<TranslationOutlined />}
-                  onClick={async () => {
-                    if (!title) return
-                    const keyName = c("fanyi", title)
-                    const cachedResult =
-                      await localforage.getItem<string>(keyName)
-                    if (cachedResult) {
-                      logger.debug("cachedResult", cachedResult)
-                      formRef.current?.setFieldValue(
-                        "translatedTitle",
-                        cachedResult,
-                      )
-                      return
-                    }
-                    const result = await translate(title)
-                    logger.debug("result", result)
-                    if (result.code !== 200) {
-                      message.error(result.msg)
-                    }
-                    formRef.current?.setFieldValue(
-                      "translatedTitle",
-                      result.data.dst,
-                    )
-                    localforage.setItem(keyName, result.data.dst)
-                  }}
+                  onClick={handleTranslate}
                 ></Button>
               }
             />
