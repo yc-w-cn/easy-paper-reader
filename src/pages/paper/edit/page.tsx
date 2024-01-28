@@ -1,4 +1,4 @@
-import { translate } from "@/apis/alapi-cn/fanyi"
+import { translate } from "@/utils/translate/providers/alapi-cn"
 import { PaperType, getPaper, updatePaper } from "@/apis/local-data/paper"
 import { BasicLayout, ContentWrapper } from "@/components"
 import { c } from "@/utils/key-name"

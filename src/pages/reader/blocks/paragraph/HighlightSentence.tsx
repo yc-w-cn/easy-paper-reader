@@ -10,7 +10,7 @@ import { ReferenceType, WordType } from "@/apis/local-data/block"
 import { useDeepCompareMemo } from "use-deep-compare"
 import { getGeminiReply } from "@/apis/gemini/generate"
 import { isURL } from "@/utils/url"
-import { translate } from "@/apis/gemini/prompts/translate"
+import { translate } from "@/utils/translate/providers/gemeni-pro"
 
 type Props = {
   id: string

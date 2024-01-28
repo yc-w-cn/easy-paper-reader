@@ -1,4 +1,4 @@
-import { translate } from "@/apis/alapi-cn/fanyi"
+import { translate } from "@/utils/translate/providers/alapi-cn"
 import { BasicLayout } from "@/components"
 import { c } from "@/utils/key-name"
 import Logger from "@/utils/logger"
