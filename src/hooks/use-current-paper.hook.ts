@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useParams } from "react-router-dom"
 import { PaperType, getPaperById } from "@/apis/local-data/paper"
 
@@ -7,7 +7,8 @@ export function useCurrentPaper(id?: string) {
   const [currentPaper, setCurrentPaper] = useState<PaperType | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isFetched, setIsFetched] = useState(false)
-  const currentPaperId = id || paperId
+  
+  const currentPaperId = useMemo(() => id || paperId, [id, paperId])
 
   const refresh = async () => {
     if (!currentPaperId) return
