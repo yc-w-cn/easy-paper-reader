@@ -1,14 +1,15 @@
-import { replace, clone, compact } from "lodash"
+import { replace, clone, compact, escapeRegExp } from "lodash"
 
 export const confusingList = [
   ["e.g.", "e#g#"],
   ["vs.", "vs#"],
+  ["al.", "al#"],
 ]
 
 export function replaceConfusingWords(text: string) {
   let result = clone(text)
   for (const pair of confusingList) {
-    result = replace(result, pair[0], pair[1])
+    result = replace(result, new RegExp(escapeRegExp((pair[0])), 'g'), pair[1])
   }
   return result
 }
@@ -16,7 +17,7 @@ export function replaceConfusingWords(text: string) {
 export function recoveryConfusingWords(text: string) {
   let result = clone(text)
   for (const pair of confusingList) {
-    result = replace(result, pair[1], pair[0])
+    result = replace(result, new RegExp(escapeRegExp(pair[1]), 'g'), pair[0])
   }
   return result
 }
