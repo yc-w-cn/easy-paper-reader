@@ -2,10 +2,12 @@ import { useReaderDispatch, useReaderSelector } from "@/stores"
 import { Button, ConfigProvider, Flex, Input, Modal, Radio, Space } from "antd"
 import { useBlockKey } from "@/pages/reader/providers"
 import { saveBlockProperties, selectBlock } from "@/features/reader/blocks"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { HighlightSentence } from "./HighlightSentence"
 import { toSentences } from "@/utils/paragragh"
 import { CommentPanel, ReferencePanel } from "../../panels"
+import { TextAreaRef } from "antd/es/input/TextArea"
+import { useDeepCompareEffect } from "use-deep-compare"
 
 type Props = {
   open?: boolean
@@ -18,24 +20,35 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
   const { entity } = useReaderSelector((state) => selectBlock(state, blockKey))
   const [panel, setPanel] = useState("拆句")
   const [isMix, setIsMix] = useState(false)
+  const [innerSentenceText, setInnerSentenceText] = useState("")
+  const [isSentencesTextFetched, setIsSentencesTextFetched] = useState(false)
 
   const sentencesText = (entity?.properties?.sentences as string[])?.join?.(
     "\n\n",
   )
+
+  useDeepCompareEffect(() => {
+    if (sentencesText && !isSentencesTextFetched) {
+      changeSentenceTextArea(sentencesText)
+      setIsSentencesTextFetched(true)
+    }
+  }, [sentencesText, isSentencesTextFetched])
 
   const toggleMixNote = () => {
     setIsMix((previous) => !previous)
   }
 
   const updateSentencesFromText = (text: string) => {
-    dispatch(
-      saveBlockProperties({
-        blockKey,
-        properties: {
-          sentences: text.split("\n\n"),
-        },
-      }),
-    )
+    if (text) {
+      dispatch(
+        saveBlockProperties({
+          blockKey,
+          properties: {
+            sentences: text.split("\n\n"),
+          },
+        }),
+      )
+    }
   }
 
   const initSentences = () => {
@@ -45,11 +58,19 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
   }
 
   const resetSentences = () => {
-    updateSentencesFromText(entity?.properties?.content || "")
+    const newValue = entity?.properties?.content || ""
+    updateSentencesFromText(newValue)
+    changeSentenceTextArea(newValue)
   }
 
   const autoSentences = () => {
-    updateSentencesFromText(toSentences(sentencesText).join("\n\n"))
+    const result = toSentences(sentencesText).join("\n\n")
+    updateSentencesFromText(result)
+    changeSentenceTextArea(result)
+  }
+
+  const changeSentenceTextArea = (value: string) => {
+    setInnerSentenceText(value)
   }
 
   useEffect(() => {
@@ -115,12 +136,17 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
           </Space.Compact>
         </ConfigProvider>
       </Flex>
-      {panel === "拆句" && sentencesText && (
+      {panel === "拆句" && (
         <Input.TextArea
+          key="sentenceTextArea"
           className="flex-grow flex-shrink resize-none"
           autoSize={false}
-          defaultValue={sentencesText}
-          onChange={(e) => updateSentencesFromText(e.currentTarget.value)}
+          value={innerSentenceText}
+          onChange={(e) => {
+            const newValue = e.currentTarget.value
+            updateSentencesFromText(newValue)
+            changeSentenceTextArea(newValue)
+          }}
         ></Input.TextArea>
       )}
       {panel === "词解" && (
