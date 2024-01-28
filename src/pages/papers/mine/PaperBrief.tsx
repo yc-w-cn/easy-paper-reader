@@ -12,19 +12,48 @@ export function PaperBrief({ paper }: Props) {
       {paper.translatedTitle && (
         <span className="text-xs text-gray-600">{paper.translatedTitle}</span>
       )}
-      {paper.tags?.length > 0 && (
-        <Space size={4}>
-          {paper.tags.map((item, index) => (
+      <Space size={4}>
+        {paper.arxiv && (
+          <>
             <Tag
-              key={`tag-${item.name}-${index}`}
-              color={item.color}
-              className="text-xs text-[10px] px-1 m-0"
+              color="cyan"
+              className="text-xs text-[10px] px-1 m-0 hover:cursor-pointer"
+              onClick={() => window.open(paper.arxiv?.abstract)}
             >
-              {item.name}
+              Abstract
             </Tag>
-          ))}
-        </Space>
-      )}
+            <Tag
+              color="red"
+              className="text-xs text-[10px] px-1 m-0 hover:cursor-pointer"
+              onClick={() => window.open(paper.arxiv?.pdf)}
+            >
+              PDF
+            </Tag>
+          </>
+        )}
+        {paper.github && (
+          <Tag
+            color="gold"
+            className="text-xs text-[10px] px-1 m-0 hover:cursor-pointer"
+            onClick={() => window.open(paper.github?.url)}
+          >
+            Code
+          </Tag>
+        )}
+        {paper.tags?.length > 0 && (
+          <>
+            {paper.tags.map((item, index) => (
+              <Tag
+                key={`tag-${item.name}-${index}`}
+                color={item.color}
+                className="text-xs text-[10px] px-1 m-0"
+              >
+                {item.name}
+              </Tag>
+            ))}
+          </>
+        )}
+      </Space>
     </Space>
   )
 }
