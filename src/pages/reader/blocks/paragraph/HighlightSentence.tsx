@@ -43,7 +43,7 @@ export function HighlightSentence({
     const rawRecords: ReferenceType[] = entity?.properties?.references || []
     const items = filter(rawRecords, (item) => sentence.includes(item.word))
     return items
-  }, [entity?.properties?.references])
+  }, [entity?.properties?.references, sentence])
 
   const words = useDeepCompareMemo(() => {
     const result: WordType[] = []
