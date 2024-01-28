@@ -239,7 +239,7 @@ export function HighlightSentence({
                         }}
                       >
                         <span className="flex-none ml-5 font-bold">
-                          {word.word}
+                          {word.word || "(empty)"}
                         </span>
                       </Popover>
                       <Popover
