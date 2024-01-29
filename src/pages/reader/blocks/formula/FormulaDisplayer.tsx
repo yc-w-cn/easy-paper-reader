@@ -14,7 +14,6 @@ import { getGeminiImageReply } from "@/apis/gemini/generate"
 import { useState } from "react"
 import "katex/dist/katex.min.css"
 import { BlockMath } from "react-katex"
-import { e } from "vitest/dist/reporters-qc5Smpt5.js"
 
 export function FormulaDisplayer() {
   const dispatch = useReaderDispatch()
@@ -119,7 +118,7 @@ export function FormulaDisplayer() {
             <Input.TextArea
               autoSize
               classNames={{
-                textarea: "text-xs text-gray-500 leading-4"
+                textarea: "text-xs text-gray-500 leading-4",
               }}
               value={properties.latex}
               bordered={false}
