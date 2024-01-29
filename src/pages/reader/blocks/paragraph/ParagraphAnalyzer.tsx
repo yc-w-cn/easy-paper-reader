@@ -2,11 +2,10 @@ import { useReaderDispatch, useReaderSelector } from "@/stores"
 import { Button, ConfigProvider, Flex, Input, Modal, Radio, Space } from "antd"
 import { useBlockKey } from "@/pages/reader/providers"
 import { saveBlockProperties, selectBlock } from "@/features/reader/blocks"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { HighlightSentence } from "./HighlightSentence"
 import { toSentences } from "@/utils/paragragh"
 import { CommentPanel, ReferencePanel } from "../../panels"
-import { TextAreaRef } from "antd/es/input/TextArea"
 import { useDeepCompareEffect } from "use-deep-compare"
 
 type Props = {

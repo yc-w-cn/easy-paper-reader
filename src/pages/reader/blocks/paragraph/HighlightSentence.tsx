@@ -8,7 +8,6 @@ import { saveBlockProperties, selectBlock } from "@/features/reader/blocks"
 import { findWordOccurrences } from "@/utils/paragragh"
 import { ReferenceType, WordType } from "@/apis/local-data/block"
 import { useDeepCompareMemo } from "use-deep-compare"
-import { getGeminiReply } from "@/apis/gemini/generate"
 import { isURL } from "@/utils/url"
 import { translate } from "@/utils/translate/providers/gemeni-pro"
 

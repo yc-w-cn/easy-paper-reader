@@ -1,5 +1,5 @@
 import { Button, Input, Space } from "antd"
-import { PropsWithChildren, useEffect, useState } from "react"
+import { PropsWithChildren, useState } from "react"
 import { useDeepCompareEffect } from "use-deep-compare"
 
 const InnerSpan = ({ children }: PropsWithChildren) => (
