@@ -139,8 +139,10 @@ export function HighlightSentence({
         ranges={ranges}
         enabled={true}
         onTextHighlighted={(range) => {
-          handleCreateWord(rangeToWord(range))
-          window.getSelection()?.removeAllRanges()
+          if (!readonly && !isMix) {
+            handleCreateWord(rangeToWord(range))
+            window.getSelection()?.removeAllRanges()
+          }
         }}
         id={id}
         rangeRenderer={(
@@ -239,7 +241,7 @@ export function HighlightSentence({
                         }}
                       >
                         <span className="flex-none ml-5 font-bold">
-                          {word.word || "(empty)"}
+                          {word.word.trim() || "(empty)"}
                         </span>
                       </Popover>
                       <Popover
