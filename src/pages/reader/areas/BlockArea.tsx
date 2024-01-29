@@ -7,6 +7,7 @@ import { useReaderSelector } from "@/stores"
 import { selectBlock } from "@/features/reader/blocks"
 import { useBlockKey } from "@/pages/reader/providers"
 import { ImageEditor, ImageDisplayer } from "@/pages/reader/blocks/image"
+import { FormulaDisplayer, FormulaEditor } from "../blocks/formula"
 
 export function BlockArea() {
   const { blockKey } = useBlockKey()
@@ -39,6 +40,15 @@ export function BlockArea() {
 
   if (blockState === "edit" && blockEntity.type === "image") {
     return <ImageEditor />
+  }
+
+
+  if (blockState === "display" && blockEntity.type === "formula") {
+    return <FormulaDisplayer />
+  }
+
+  if (blockState === "edit" && blockEntity.type === "formula") {
+    return <FormulaEditor />
   }
 
   return <></>

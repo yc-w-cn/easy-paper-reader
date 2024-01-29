@@ -1,1 +1,1 @@
-export type BlockTypeType = "header" | "paragraph" | "image"
+export type BlockTypeType = "header" | "paragraph" | "image" | "formula"

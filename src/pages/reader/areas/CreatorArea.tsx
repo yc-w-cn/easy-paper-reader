@@ -6,6 +6,7 @@ import {
 import { BlockSelector } from "@/pages/reader/blocks/selector"
 import { useReaderSelector } from "@/stores"
 import { ImageCreator } from "@/pages/reader/blocks/image"
+import { FormulaCreator } from "../blocks/formula"
 
 export function CreatorArea() {
   const { state: creatorState, type: creatorType } = useReaderSelector(
@@ -22,6 +23,10 @@ export function CreatorArea() {
 
   if (creatorState === "edit" && creatorType === "image") {
     return <ImageCreator  />
+  }
+
+  if (creatorState === "edit" && creatorType === "formula") {
+    return <FormulaCreator />
   }
 
   if (creatorState === "default") {
