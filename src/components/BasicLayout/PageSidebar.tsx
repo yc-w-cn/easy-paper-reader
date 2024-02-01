@@ -62,7 +62,14 @@ export function PageSidebar() {
       </div>
       <footer className="absolute bottom-1 left-0 w-full flex justify-between text-xs px-5 pt-1 bg-white border-gray-300 text-gray-400 border-t">
         <span>&copy; 2024</span>
-        <span>Yuchen Wang</span>
+        <span>v{import.meta.env.PACKAGE_VERSION}</span>
+        <a
+          href="https://github.com/yc-w-cn"
+          target="_blank"
+          className="text-gray-400 hover:underline"
+        >
+          YC.W
+        </a>
         <span>MIT LICENSED</span>
       </footer>
     </div>
