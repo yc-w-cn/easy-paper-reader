@@ -14,53 +14,58 @@ import {
 import { TimelinePage } from "@/pages/timeline"
 import { createBrowserRouter } from "react-router-dom"
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <HomePage />,
+    },
+    {
+      path: "/dictionary",
+      element: <DictionaryPage />,
+    },
+    {
+      path: "/word/:word",
+      element: <WordPage />,
+    },
+    {
+      path: "/setting",
+      element: <SettingPage />,
+    },
+    {
+      path: "/reader/:paperId",
+      element: <ReaderPage />,
+    },
+    {
+      path: "/paper/edit/:paperId",
+      element: <PaperEditPage />,
+    },
+    {
+      path: "/paper/create",
+      element: <PaperCreatePage />,
+    },
+    {
+      path: "/papers/mine",
+      element: <PapersMinePage />,
+    },
+    {
+      path: "/conversation",
+      element: <ConversationPage />,
+    },
+    {
+      path: "/tags",
+      element: <TagsPage />,
+    },
+    {
+      path: "/comments",
+      element: <CommentsPage />,
+    },
+    {
+      path: "/timeline",
+      element: <TimelinePage />,
+    },
+  ],
   {
-    path: "/",
-    element: <HomePage />,
+    basename: import.meta.env.MODE === "gh-pages" ? "/easy-paper-reader" : "/",
   },
-  {
-    path: "/dictionary",
-    element: <DictionaryPage />,
-  },
-  {
-    path: "/word/:word",
-    element: <WordPage />,
-  },
-  {
-    path: "/setting",
-    element: <SettingPage />,
-  },
-  {
-    path: "/reader/:paperId",
-    element: <ReaderPage />,
-  },
-  {
-    path: "/paper/edit/:paperId",
-    element: <PaperEditPage />,
-  },
-  {
-    path: "/paper/create",
-    element: <PaperCreatePage />,
-  },
-  {
-    path: "/papers/mine",
-    element: <PapersMinePage />,
-  },
-  {
-    path: "/conversation",
-    element: <ConversationPage />,
-  },
-  {
-    path: "/tags",
-    element: <TagsPage />,
-  },
-  {
-    path: "/comments",
-    element: <CommentsPage />,
-  },
-  {
-    path: "/timeline",
-    element: <TimelinePage />,
-  },
-])
+)
