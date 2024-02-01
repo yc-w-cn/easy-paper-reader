@@ -3,7 +3,7 @@ import { PaperType, getPaperById } from "@/apis/local-data/paper"
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import { RootReaderState } from "@/stores"
 import { arrayMove } from "@dnd-kit/sortable"
-import { filter } from "lodash"
+import filter from "lodash/filter"
 import { fetchBlocks } from "../blocks/thunks/fetch-blocks.thunk"
 
 export type PaperState = {

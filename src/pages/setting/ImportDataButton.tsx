@@ -2,7 +2,7 @@ import { getLogger } from "@/utils/logger"
 import { App, Button, Upload, UploadFile } from "antd"
 import { RcFile } from "antd/es/upload"
 import localforage from "localforage"
-import { clone } from "lodash"
+import clone from "lodash/clone"
 
 export function ImportDataButton() {
   const logger = getLogger(ImportDataButton)
@@ -55,7 +55,7 @@ export function ImportDataButton() {
                   }
                 }
               }
-              message.success('操作成功')
+              message.success("操作成功")
               resolve(jsonData)
             }
           } catch (error) {
