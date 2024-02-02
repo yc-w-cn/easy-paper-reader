@@ -5,7 +5,7 @@ import { PaperType, pagePaperList } from "@/apis/local-data/paper"
 import { ActionType, ProTable } from "@ant-design/pro-components"
 import { PaperBrief, OperationButton } from "@/pages/papers/mine"
 
-export function PapersMinePage() {
+export default function PapersMinePage() {
   const actionRef = useRef<ActionType>()
   const { tagOptions } = useTagNames()
 

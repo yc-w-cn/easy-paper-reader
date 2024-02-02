@@ -31,7 +31,7 @@ const { Search } = Input
  */
 const ENABLE_RATE = false
 
-export function PaperEditPage() {
+export default function PaperEditPage() {
   const logger = new Logger(PaperEditPage.name)
   const formRef = useRef<ProFormInstance>()
   const [title, setTitle] = useState("")

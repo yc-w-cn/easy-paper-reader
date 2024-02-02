@@ -14,7 +14,7 @@ interface Message {
 
 const provider: "gemini" | "chatgpt" = "gemini"
 
-export function ConversationPage() {
+export default function ConversationPage() {
   const logger = new Logger(ConversationPage.name)
   const { message } = App.useApp()
   const [messages, setMessages] = useState<Message[]>([])

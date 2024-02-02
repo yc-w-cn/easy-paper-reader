@@ -9,7 +9,7 @@ import { Unsubscribe } from "@reduxjs/toolkit"
 import { setupPaperListeners } from "@/features/reader/paper/listeners"
 import { setupBlocksListeners } from "@/features/reader/blocks/listeners"
 
-export function ReaderPage() {
+export default function ReaderPage() {
   const { currentPaper, isFetched, isLoading } = useCurrentPaper()
 
   useEffect(() => {

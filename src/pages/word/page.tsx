@@ -8,7 +8,7 @@ import localforage from "localforage"
 import { Fragment } from "react"
 import { c } from "@/utils/key-name"
 
-export function WordPage() {
+export default function WordPage() {
   const logger = new Logger(WordPage.name)
   const { word } = useParams()
 

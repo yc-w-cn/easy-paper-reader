@@ -7,7 +7,7 @@ import { ReloadOutlined } from "@ant-design/icons"
 import { useQuery } from "@tanstack/react-query"
 import { App, Button, Card, Space } from "antd"
 
-export function CommentsPage() {
+export default function CommentsPage() {
   const { message } = App.useApp()
   const response = useQuery({
     queryKey: ["comments-snapshot"],

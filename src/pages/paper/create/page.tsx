@@ -23,7 +23,7 @@ type FormType = {
   translatedTitle?: string
 }
 
-export function PaperCreatePage() {
+export default function PaperCreatePage() {
   const logger = new Logger(PaperCreatePage.name)
   const [title, setTitle] = useState("")
   const { message } = App.useApp()

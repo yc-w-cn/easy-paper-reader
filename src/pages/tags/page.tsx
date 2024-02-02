@@ -6,7 +6,7 @@ import { App, Button, Empty, Flex, Tag } from "antd"
 
 const QUERY_KEY = "tags-snapshot"
 
-export function TagsPage() {
+export default function TagsPage() {
   const { message } = App.useApp()
   const queryClient = useQueryClient()
 

@@ -10,7 +10,7 @@ import { CreatePaperAction } from "./CreatePaperAction"
 
 const QUERY_KEY = "history-snapshot"
 
-export function TimelinePage() {
+export default function TimelinePage() {
   const { message } = App.useApp()
   const queryClient = useQueryClient()
 

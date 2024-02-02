@@ -2,7 +2,7 @@ import { Tabs } from "antd"
 import { BasicLayout, ContentWrapper } from "@/components"
 import { TabCommon, TabFanyi, TabDictionary, TabStorage } from "@/pages/setting"
 
-export function SettingPage() {
+export default function SettingPage() {
   return (
     <BasicLayout mode='custom'>
       <ContentWrapper className="mr-5">

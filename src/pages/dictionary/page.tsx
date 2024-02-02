@@ -6,7 +6,7 @@ import dictionaryImage from "./dictionary.png"
 import { useNavigate } from "react-router-dom"
 import debounce from "lodash/debounce"
 
-export function DictionaryPage() {
+export default function DictionaryPage() {
   const navigate = useNavigate()
   const [options, setOptions] = useState<SelectProps<object>["options"]>([])
   const [currentValue, setCurrentValue] = useState("")
