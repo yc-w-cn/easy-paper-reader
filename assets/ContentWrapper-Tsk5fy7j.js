@@ -1,0 +1,1 @@
+import{j as e}from"./index-nJ5_Qu1f.js";import{c as t}from"./PageWrapper-8_FQrqxr.js";function s({children:o,className:r}){return e.jsx("div",{className:t("w-full flex-grow flex-shrink flex flex-col overflow-auto",r),children:o})}export{s as C};

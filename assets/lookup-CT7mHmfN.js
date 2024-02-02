@@ -1,0 +1,1 @@
+import{a as e}from"./axios-G2rPRu76.js";function t(o){return"https://corsproxy.io/?"+encodeURIComponent(o)}async function s(o){return(await e({url:t(`https://dict-mobile.iciba.com/interface/index.php?c=word&m=getsuggest&is_need_mean=1&word=${o}`),method:"get"})).data}export{s as l};
