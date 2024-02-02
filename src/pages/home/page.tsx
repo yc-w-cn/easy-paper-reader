@@ -4,7 +4,7 @@ import { BasicLayout } from "@/components"
 import { Button, Space } from "antd"
 import { useNavigate } from "react-router-dom"
 
-export function HomePage() {
+export default function HomePage() {
   const navigate = useNavigate()
 
   return (

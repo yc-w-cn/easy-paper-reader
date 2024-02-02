@@ -1,68 +1,66 @@
-import {
-  DictionaryPage,
-  HomePage,
-  WordPage,
-  SettingPage,
-  PapersMinePage,
-  ConversationPage,
-  PaperCreatePage,
-  PaperEditPage,
-  ReaderPage,
-  TagsPage,
-  CommentsPage,
-} from "@/pages"
-import { TimelinePage } from "@/pages/timeline"
 import { createBrowserRouter } from "react-router-dom"
+
+const lazyWrap = (factory: () => Promise<any>) => {
+  return async () => {
+    const page = await factory()
+    // https://reactrouter.com/en/main/route/lazy
+    return {
+      Component: page.default || page.Component,
+      ErrorBoundary: page.ErrorBoundary,
+      loader: page.loader,
+    }
+  }
+}
 
 export const router = createBrowserRouter(
   [
     {
       path: "/",
-      element: <HomePage />,
+      lazy: lazyWrap(() => import("@/pages/home/page")),
     },
     {
       path: "/dictionary",
-      element: <DictionaryPage />,
+      lazy: lazyWrap(() => import("@/pages/dictionary/page")),
     },
     {
       path: "/word/:word",
-      element: <WordPage />,
+      lazy: lazyWrap(() => import("@/pages/word/page")),
     },
     {
       path: "/setting",
-      element: <SettingPage />,
+      lazy: lazyWrap(() => import("@/pages/setting/page")),
     },
     {
       path: "/reader/:paperId",
-      element: <ReaderPage />,
+      lazy: lazyWrap(() => import("@/pages/reader/page")),
     },
     {
       path: "/paper/edit/:paperId",
-      element: <PaperEditPage />,
+      lazy: lazyWrap(() => import("@/pages/paper/edit")),
     },
     {
       path: "/paper/create",
-      element: <PaperCreatePage />,
+      lazy: lazyWrap(() => import("@/pages/paper/create")),
     },
     {
       path: "/papers/mine",
-      element: <PapersMinePage />,
+      lazy: lazyWrap(() => import("@/pages/papers/mine")),
     },
     {
       path: "/conversation",
-      element: <ConversationPage />,
+      lazy: lazyWrap(() => import("@/pages/conversation/page")),
     },
     {
       path: "/tags",
-      element: <TagsPage />,
+      lazy: lazyWrap(() => import("@/pages/tags/page")),
     },
     {
       path: "/comments",
-      element: <CommentsPage />,
+      lazy: lazyWrap(() => import("@/pages/comments/page")),
     },
     {
       path: "/timeline",
-      element: <TimelinePage />,
+      lazy: lazyWrap(() => import("@/pages/timeline/page")),
     },
   ],
   {
