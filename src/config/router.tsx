@@ -36,11 +36,11 @@ export const router = createBrowserRouter(
     },
     {
       path: "/paper/edit/:paperId",
-      lazy: lazyWrap(() => import("@/pages/paper/edit")),
+      lazy: lazyWrap(() => import("@/pages/paper/edit/page")),
     },
     {
       path: "/paper/create",
-      lazy: lazyWrap(() => import("@/pages/paper/create")),
+      lazy: lazyWrap(() => import("@/pages/paper/create/page")),
     },
     {
       path: "/papers/mine",
