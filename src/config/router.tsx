@@ -44,7 +44,7 @@ export const router = createBrowserRouter(
     },
     {
       path: "/papers/mine",
-      lazy: lazyWrap(() => import("@/pages/papers/mine")),
+      lazy: lazyWrap(() => import("@/pages/papers/mine/page")),
     },
     {
       path: "/conversation",
