@@ -20,7 +20,7 @@ export async function translate(q: string) {
   if (!token) {
     throw new Error("ALAPI_CN_TOKEN_NOT_FOUND")
   }
-  const response = await axios<FanyiResult>({
+  const response = await axios<FanyiResult | FanyiErrorResult>({
     url: "https://v2.alapi.cn/api/fanyi",
     method: "post",
     data: {
@@ -30,7 +30,12 @@ export async function translate(q: string) {
       to: "zh",
     },
   })
-  return response.data
+  if (response.data.data.dst) {
+    return response.data.data.dst
+  }
+  if (response.data.data.msg) {
+    throw new Error(response.data.data.msg)
+  }
 }
 
 export type FanyiResult = {
@@ -42,4 +47,13 @@ export type FanyiResult = {
     src: string
     dst: string
   }
+}
+
+export type FanyiErrorResult = {
+  code: number // 100
+  msg: string // "success"
+  data: any // null
+  time: number
+  log_id: string // "615277301556092928"
+  usage: number // 0
 }
