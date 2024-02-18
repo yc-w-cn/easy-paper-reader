@@ -48,9 +48,9 @@ export default function PapersMinePage() {
               hideInTable: true,
             },
             {
-              title: "加入时间",
-              key: "ctime",
-              dataIndex: "ctime",
+              title: "最后修改",
+              key: "modified",
+              renderText: (_, record) => record.mtime || record.ctime,
               valueType: "date",
               hideInSearch: true,
             },

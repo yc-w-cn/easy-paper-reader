@@ -45,7 +45,8 @@ export async function pagePaperList(options: PagePaperListOptions) {
 
   // sort
   const papersOrderByCtime = paperResult.sort(
-    (item1, item2) => item1.ctime - item2.ctime,
+    (item1, item2) =>
+      (item2.mtime || item2.ctime) - (item1.mtime || item1.ctime),
   )
 
   // pagination
