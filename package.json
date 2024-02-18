@@ -14,7 +14,8 @@
     "test:ui": "vitest --ui",
     "coverage": "vitest run --coverage",
     "predeploy": "tsc && vite build --mode gh-pages",
-    "deploy": "gh-pages -d dist -t true"
+    "deploy": "gh-pages -d dist -t true",
+    "tauri:build": "pnpm tauri build"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.18.2",
