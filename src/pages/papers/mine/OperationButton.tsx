@@ -1,5 +1,7 @@
-import { PaperType } from "@/apis/local-data/paper"
+import { PaperType, backupPaper } from "@/apis/local-data/paper"
+import { ISO_DATE_FORMAT } from "@/utils/date"
 import { App, Dropdown } from "antd"
+import dayjs from "dayjs"
 import localforage from "localforage"
 import { useNavigate } from "react-router-dom"
 
@@ -19,6 +21,23 @@ export function OperationButton({ paper, onChange }: Props) {
       size="small"
       menu={{
         items: [
+          {
+            label: "备份数据",
+            key: "backup",
+            onClick: async ()=> {
+              const data = await backupPaper(paper.key);
+              const jsonData = JSON.stringify(data, null, 2);
+              const blob = new Blob([jsonData], { type: "application/json" });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = `${paper.key}-${dayjs().format(ISO_DATE_FORMAT)}.json`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+            }
+          },
           {
             label: "删除",
             key: "delete",
