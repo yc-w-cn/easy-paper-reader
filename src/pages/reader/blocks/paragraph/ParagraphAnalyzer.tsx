@@ -21,6 +21,7 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
   const [isMix, setIsMix] = useState(false)
   const [innerSentenceText, setInnerSentenceText] = useState("")
   const [isSentencesTextFetched, setIsSentencesTextFetched] = useState(false)
+  const [showEditor, setShowEditor] = useState(false)
 
   const sentencesText = (entity?.properties?.sentences as string[])?.join?.(
     "\n\n",
@@ -35,6 +36,10 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
 
   const toggleMixNote = () => {
     setIsMix((previous) => !previous)
+  }
+
+  const toggleShowEditor = () => {
+    setShowEditor((previous) => !previous)
   }
 
   const updateSentencesFromText = (text: string) => {
@@ -131,6 +136,13 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
                 </Button>
               </>
             )}
+            {panel === "文献" && (
+              <>
+                <Button size="small" onClick={() => toggleShowEditor()}>
+                  {showEditor ? "返回" : "新增"}
+                </Button>
+              </>
+            )}
             <Button size="small">AI</Button>
           </Space.Compact>
         </ConfigProvider>
@@ -162,11 +174,7 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
           </Flex>
         </div>
       )}
-      {panel === "文献" && (
-        <div className="flex-grow flex-shrink overflow-auto pr-2">
-          <ReferencePanel />
-        </div>
-      )}
+      {panel === "文献" && <ReferencePanel showEditor={showEditor} />}
       {panel === "笔记" && (
         <div className="w-[600px]">
           <CommentPanel />

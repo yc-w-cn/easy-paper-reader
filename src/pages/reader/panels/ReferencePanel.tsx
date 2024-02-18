@@ -4,7 +4,16 @@ import {
 } from "@/features/reader/blocks"
 import { useReaderDispatch, useReaderSelector } from "@/stores"
 import { useBlockKey } from "../providers"
-import { App, Button, ConfigProvider, Empty, Input, Popover, Space } from "antd"
+import {
+  App,
+  Button,
+  ConfigProvider,
+  Empty,
+  Flex,
+  Input,
+  Popover,
+  Space,
+} from "antd"
 import { ReferenceType } from "@/apis/local-data/block"
 import { useState } from "react"
 import filter from "lodash/filter"
@@ -14,9 +23,10 @@ import { isURL } from "@/utils/url"
 
 type Props = {
   readonly?: boolean
+  showEditor?: boolean
 }
 
-export function ReferencePanel({ readonly = false }: Props) {
+export function ReferencePanel({ readonly = false, showEditor = false }: Props) {
   const dispatch = useReaderDispatch()
   const { blockKey } = useBlockKey()
   const blockEntity = useReaderSelector((state) =>
@@ -74,44 +84,52 @@ export function ReferencePanel({ readonly = false }: Props) {
   }
 
   return (
-    <Space direction="vertical">
+    <Flex vertical className="flex-grow flex-shrink overflow-hidden pr-2">
       {!references?.length && (
         <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="w-[400px]" />
       )}
-      {references.map((reference, index) => (
-        <p key={`refenrence-${index}`}>
-          <Popover
-            content={
-              <Button
-                type="text"
-                size="small"
-                icon={<DeleteOutlined />}
-                onClick={() => remove(reference.word)}
-              />
-            }
-            arrow={false}
-            placement="right"
-            overlayInnerStyle={{
-              backgroundColor: "transparent",
-              padding: 0,
-              boxShadow: "none",
-            }}
-          >
-            <strong>{reference.word}</strong>
-          </Popover>
-          <br />
-          {isURL(reference.title) ? (
-            <a href={reference.title} target="_blank">
-              {reference.title}
-            </a>
-          ) : (
-            reference.title
-          )}
-        </p>
-      ))}
-      {!readonly && (
+      {!!references?.length && (
+        <div className="flex-grow flex-shrink overflow-auto">
+          {references.map((reference, index) => (
+            <p key={`refenrence-${index}`}>
+              <Popover
+                content={
+                  <Button
+                    type="text"
+                    size="small"
+                    icon={<DeleteOutlined />}
+                    onClick={() => remove(reference.word)}
+                  />
+                }
+                arrow={false}
+                placement="right"
+                overlayInnerStyle={{
+                  backgroundColor: "transparent",
+                  padding: 0,
+                  boxShadow: "none",
+                }}
+              >
+                <strong>{reference.word}</strong>
+              </Popover>
+              <br />
+              {isURL(reference.title) ? (
+                <a href={reference.title} target="_blank">
+                  {reference.title}
+                </a>
+              ) : (
+                reference.title
+              )}
+            </p>
+          ))}
+        </div>
+      )}
+      {!readonly && showEditor && (
         <ConfigProvider autoInsertSpaceInButton={false}>
-          <Space direction="vertical" size="small">
+          <Space
+            direction="vertical"
+            size="small"
+            className="h-[155px] mt-1 flex-none"
+          >
             <Input
               value={word}
               onChange={(e) => setWord(e.currentTarget.value)}
@@ -140,6 +158,6 @@ export function ReferencePanel({ readonly = false }: Props) {
           </Space>
         </ConfigProvider>
       )}
-    </Space>
+    </Flex>
   )
 }
