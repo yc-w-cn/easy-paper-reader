@@ -162,7 +162,11 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
           </Flex>
         </div>
       )}
-      {panel === "文献" && <ReferencePanel />}
+      {panel === "文献" && (
+        <div className="flex-grow flex-shrink overflow-auto pr-2">
+          <ReferencePanel />
+        </div>
+      )}
       {panel === "笔记" && (
         <div className="w-[600px]">
           <CommentPanel />
