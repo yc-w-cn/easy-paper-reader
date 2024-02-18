@@ -15,7 +15,9 @@ export default function PapersMinePage() {
         <ProTable<PaperType>
           actionRef={actionRef}
           rowKey="id"
-          toolBarRender={false}
+          options={{
+            density: false,
+          }}
           search={{
             span: 12,
           }}
