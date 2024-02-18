@@ -26,7 +26,10 @@ type Props = {
   showEditor?: boolean
 }
 
-export function ReferencePanel({ readonly = false, showEditor = false }: Props) {
+export function ReferencePanel({
+  readonly = false,
+  showEditor = false,
+}: Props) {
   const dispatch = useReaderDispatch()
   const { blockKey } = useBlockKey()
   const blockEntity = useReaderSelector((state) =>
@@ -86,7 +89,9 @@ export function ReferencePanel({ readonly = false, showEditor = false }: Props) 
   return (
     <Flex vertical className="flex-grow flex-shrink overflow-hidden pr-2">
       {!references?.length && (
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="w-[400px]" />
+        <div className="flex-grow flex-shrink overflow-auto items-center flex justify-center">
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="w-[400px]" />
+        </div>
       )}
       {!!references?.length && (
         <div className="flex-grow flex-shrink overflow-auto">
