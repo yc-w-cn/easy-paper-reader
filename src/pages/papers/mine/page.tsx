@@ -49,6 +49,7 @@ export default function PapersMinePage() {
             },
             {
               title: "最后修改",
+              width: 120,
               key: "modified",
               renderText: (_, record) => record.mtime || record.ctime,
               valueType: "date",
