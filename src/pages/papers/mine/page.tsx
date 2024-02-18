@@ -20,6 +20,7 @@ export default function PapersMinePage() {
           }}
           search={{
             span: 12,
+            className: 'm-0 py-0'
           }}
           request={pagePaperList}
           columns={[
