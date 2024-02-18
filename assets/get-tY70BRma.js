@@ -1,1 +1,0 @@
-import{c as n}from"./key-name-frYyCvOB.js";import{l as r}from"./localforage-m1Io_pXx.js";async function i(){const t=(await r.keys()).filter(a=>a.startsWith("paper")),s=[];for(const a of t){const p=await r.getItem(a);p&&s.push(p)}return s}async function o(e){return r.getItem(e)}async function y(e){const t=n("paper",e);return o(t)}export{y as a,o as b,i as g};

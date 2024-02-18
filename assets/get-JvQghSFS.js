@@ -1,1 +1,0 @@
-import{l as s}from"./localforage-m1Io_pXx.js";async function r(o){return(await a(o)).filter(c=>c.type==="header")}async function a(o){const t=[];for(const c of o){const e=await s.getItem(c);e&&t.push(e)}return t}export{r as a,a as g};
