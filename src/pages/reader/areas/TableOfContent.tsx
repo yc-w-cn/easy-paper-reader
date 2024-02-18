@@ -24,6 +24,12 @@ export function TableOfContent({ className }: Props) {
           defaultExpandAll
           switcherIcon={<DownOutlined />}
           treeData={tableOfContent}
+          titleRender={(node) => {
+            if (!node.children?.length) {
+              return <>· {node.title}</>
+            }
+            return <>{node.title}</>
+          }}
           className="p-5 my-2 mx-1 w-full"
         />
       )}
