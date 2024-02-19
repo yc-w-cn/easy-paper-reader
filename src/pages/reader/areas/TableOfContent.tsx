@@ -24,6 +24,16 @@ export function TableOfContent({ className }: Props) {
           defaultExpandAll
           switcherIcon={<DownOutlined />}
           treeData={tableOfContent}
+          onClick={(_, node) => {
+            const container = document.getElementById("page-area")
+            const target = document.getElementById(String(node.key))
+            if (container && target) {
+              container.scrollTo({
+                top: target.offsetTop - 150,
+                behavior: "smooth",
+              })
+            }
+          }}
           titleRender={(node) => {
             if (!node.children?.length) {
               return <>· {node.title}</>

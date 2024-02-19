@@ -20,7 +20,7 @@ export function NormalPaperHeader() {
   return (
     <header className="flex-none px-2 pt-4 pb-3 border-b relative flex gap-4 justify-between items-center">
       <Popover
-        content={<TableOfContent className="w-[300px]" />}
+        content={<div className="max-h-[400px] overflow-y-scroll overflow-x-hidden"><TableOfContent className="w-[300px]" /></div>}
         placement="bottomLeft"
         title="页面导航"
         trigger={["click", "hover"]}

@@ -55,7 +55,7 @@ export function PageArea() {
   }
 
   return (
-    <main className="flex-grow flex flex-col w-full px-4 py-8 overflow-auto">
+    <main id="page-area" className="flex-grow flex flex-col w-full px-4 py-8 overflow-auto scroll-smooth">
       <DndContext
         sensors={sensors}
         collisionDetection={pointerWithin}
