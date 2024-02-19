@@ -60,7 +60,7 @@ export default function PaperCreatePage() {
             const id = uuid()
             const ctime = new Date().getTime()
             const key = c("paper", id)
-            localforage.setItem(key, {
+            await localforage.setItem(key, {
               ...values,
               id,
               key,
