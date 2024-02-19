@@ -16,7 +16,7 @@ export function ZenLayout({ children }: Props) {
         </div>
       </Panel>
       <PanelResizeHandle className="w-2" />
-      <Panel minSize={50} className="bg-grap-100 overflow-auto">
+      <Panel id="zen-layout" minSize={50} className="bg-grap-100 overflow-auto">
         {children}
       </Panel>
     </PanelGroup>

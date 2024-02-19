@@ -10,6 +10,7 @@ export function TableOfContent({ className }: Props) {
   const { isLoaded, value: tableOfContent } = useReaderSelector(
     (state) => state.tableOfContent,
   )
+  const { mode } = useReaderSelector((state) => state.layout)
 
   return (
     <div className={className}>
@@ -25,13 +26,27 @@ export function TableOfContent({ className }: Props) {
           switcherIcon={<DownOutlined />}
           treeData={tableOfContent}
           onClick={(_, node) => {
-            const container = document.getElementById("page-area")
-            const target = document.getElementById(String(node.key))
-            if (container && target) {
-              container.scrollTo({
-                top: target.offsetTop - 150,
-                behavior: "smooth",
-              })
+            if (mode === "basic") {
+              const container = document.getElementById("page-area")
+              const target = document.getElementById(String(node.key))
+              if (container && target) {
+                container.scrollTo({
+                  top: target.offsetTop - 150,
+                  behavior: "smooth",
+                })
+              }
+            }
+            if (mode === "zen") {
+              const container = document.querySelector(
+                '[data-panel-id="zen-layout"]',
+              )
+              const target = document.getElementById(String(node.key))
+              if (container && target) {
+                container.scrollTo({
+                  top: target.offsetTop - 20,
+                  behavior: "smooth",
+                })
+              }
             }
           }}
           titleRender={(node) => {
