@@ -40,6 +40,15 @@ export function PaperBrief({ paper }: Props) {
             Code
           </Tag>
         )}
+        {paper.website && (
+          <Tag
+            color="pink"
+            className="text-xs text-[10px] px-1 m-0 hover:cursor-pointer"
+            onClick={() => window.open(paper.website?.url)}
+          >
+            Website
+          </Tag>
+        )}
         {paper.tags?.length > 0 && (
           <>
             {paper.tags.map((item, index) => (

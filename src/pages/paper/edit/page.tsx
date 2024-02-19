@@ -16,7 +16,7 @@ import { App, Button, Flex, Input, Spin } from "antd"
 import localforage from "localforage"
 import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { TagsEditor } from "@/pages/paper"
+import { TagsEditor, WebsiteEditor } from "@/pages/paper"
 import { refreshTagsSnapshot } from "@/apis/local-data/tag"
 import { ArxivEditor } from "./ArxivEditor"
 import { PaperWithCodeEditor } from "./PaperWithCodeEditor"
@@ -182,6 +182,9 @@ export default function PaperEditPage() {
             </ProFormItem>
             <ProFormItem name="github" label="Github" className="w-full">
               <GithubEditor />
+            </ProFormItem>
+            <ProFormItem name="website" label="Website" className="w-full">
+              <WebsiteEditor />
             </ProFormItem>
             <ProFormItem label="标签" name="tags" className="w-full">
               <TagsEditor />
