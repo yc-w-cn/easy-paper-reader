@@ -1,0 +1,1 @@
+import{l as n}from"./PageWrapper-FKZhqcit.js";import{g}from"./get-xB22vYAQ.js";async function f(){return await n.getItem("tags")||[]}async function c(){const a=await g(),s=[];for(const t of a)if(t!=null&&t.tags)for(const o of t.tags)s.includes(o.name)||s.push(o.name);n.setItem("tags",s)}export{f as g,c as r};
