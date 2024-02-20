@@ -160,7 +160,7 @@ export function HighlightSentence({
                 key={`tooltip-${rangeIndex}`}
                 placement="top"
                 overlay={
-                  (range.data as any as WordType).translatedWord || false
+                  <span>{(range.data as any as WordType).translatedWord}</span>
                 }
               >
                 <span>{lettersNode}</span>
