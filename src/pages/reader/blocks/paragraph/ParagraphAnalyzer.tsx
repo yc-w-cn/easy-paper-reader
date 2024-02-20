@@ -7,6 +7,7 @@ import { HighlightSentence } from "./HighlightSentence"
 import { toSentences } from "@/utils/paragragh"
 import { CommentPanel, ReferencePanel } from "../../panels"
 import { useDeepCompareEffect } from "use-deep-compare"
+import { SettingPanel } from "../../panels/SettingPanel"
 
 type Props = {
   open?: boolean
@@ -111,7 +112,7 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
     >
       <Flex justify="space-between">
         <Radio.Group
-          options={["拆句", "词解", "文献", "笔记"]}
+          options={["拆句", "词解", "文献", "笔记", "操作"]}
           optionType="button"
           value={panel}
           onChange={(e) => setPanel(e.target.value)}
@@ -180,6 +181,13 @@ export function ParagraphAnalyzer({ open, onOpenChange }: Props) {
           <CommentPanel />
         </div>
       )}
+      {
+        panel === "操作" && (
+          <div className="w-[600px]">
+            <SettingPanel />
+          </div>
+        )
+      }
     </Modal>
   )
 }

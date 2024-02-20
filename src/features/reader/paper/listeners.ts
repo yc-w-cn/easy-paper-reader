@@ -3,6 +3,7 @@ import { Unsubscribe } from "@reduxjs/toolkit"
 import { exchangeBlockKeys, initPaper, removeBlockKey } from "./slice"
 import { fetchBlocks } from "../blocks"
 import { updatePaper } from "@/apis/local-data/paper"
+import { removeBlock } from "@/apis/local-data/block/remove"
 
 /**
  * Subscribes counter listeners and returns a `teardown` function.
@@ -46,12 +47,13 @@ export function setupPaperListeners(
     }),
     startListening({
       actionCreator: removeBlockKey,
-      effect: async (_, listenerApi) => {
+      effect: async ({ payload }, listenerApi) => {
         const paper = listenerApi.getState().paper.value
         if (paper) {
-          updatePaper(paper.key, {
+          await updatePaper(paper.key, {
             blockKeys: paper.blockKeys,
           })
+          await removeBlock(payload)
         }
       },
     }),
