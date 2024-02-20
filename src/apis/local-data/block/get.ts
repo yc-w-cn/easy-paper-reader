@@ -10,7 +10,7 @@ export async function getHeaderBlocks(keys: string[]) {
   return blocks.filter((item) => item.type === "header")
 }
 
-export async function getBlocks(keys: string[]) {
+export async function getBlocks(keys: string[] = []) {
   const blocks = []
   for (const key of keys) {
     const block = await localforage.getItem<BlockType>(key)
