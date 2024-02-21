@@ -133,13 +133,13 @@ export function ReferencePanel({
           <Space
             direction="vertical"
             size="small"
-            className="h-[155px] mt-1 flex-none"
+            className="min-h-[155px] mt-1 flex-none"
           >
             <Input
               value={word}
               onChange={(e) => setWord(e.currentTarget.value)}
               size="small"
-              className="w-[400px]"
+              className="w-full"
               placeholder="文献缩写"
             />
             <Input.TextArea
@@ -149,17 +149,17 @@ export function ReferencePanel({
               autoSize={{
                 minRows: 4,
               }}
-              className="w-[400px]"
+              className="w-full"
               placeholder="文章名称"
             />
-            <Space>
+            <Flex gap={8} justify="end">
               <Button size="small" type="primary" onClick={handleSave}>
                 保存
               </Button>
               <Button size="small" type="default" onClick={resetCreator}>
                 重置
               </Button>
-            </Space>
+            </Flex>
           </Space>
         </ConfigProvider>
       )}
