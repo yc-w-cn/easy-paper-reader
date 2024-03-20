@@ -18,7 +18,7 @@ export function TabGemini() {
   }, [])
 
   return (
-    <Flex vertical gap={20}>
+    <Flex vertical gap={20} className="pr-5">
       <Flex vertical gap={0}>
         <h3>获取 Gemini API key</h3>
         <p className="leading-3">
